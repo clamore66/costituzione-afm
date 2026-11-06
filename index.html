@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Costituzione italiana — I primi 12 articoli | Tool 2ª AFM</title>
+<meta name="description" content="Tool interattivo per classe 2ª AFM sulla struttura e le caratteristiche della Costituzione della Repubblica italiana, con focus sui primi 12 articoli (Principi fondamentali).">
+<style>
+:root{--blu:#1a3a5f;--blu2:#2a5480;--azz:#e8f1fa;--acc:#e9a426;--bronzo:#a86f16;--ok:#1e8e3e;--ko:#c5221f;--gr:#f6f7f9;--verde:#0e7a45}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;margin:0;background:var(--gr);color:#222;line-height:1.6;font-size:18px}
+.skip{position:absolute;left:-9999px;top:0;background:#fff;color:var(--blu);padding:.6rem 1rem;z-index:99;border-radius:0 0 8px 0;font-weight:700}
+.skip:focus{left:0}
+header{background:var(--blu);color:#fff;padding:1.1rem 1rem 1.2rem;text-align:center}
+header h1{margin:.2rem 0;font-size:1.6rem}
+header p{margin:.3rem 0;opacity:.92;font-size:.95rem}
+.prog{max-width:900px;margin:.7rem auto 0}
+.prog-b{height:11px;background:rgba(255,255,255,.22);border-radius:8px;overflow:hidden}
+.prog-b i{display:block;height:100%;width:0;background:var(--acc);transition:width .4s ease}
+.progtxt{font-size:.9rem;margin:.35rem 0 0}
+.tools{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;align-items:center;max-width:900px;margin:.7rem auto 0}
+.tools button,.sw{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.45);color:#fff;border-radius:20px;padding:.35rem .8rem;font-size:.88rem;cursor:pointer;font-family:inherit}
+.tools button:hover,.sw:hover{background:rgba(255,255,255,.28)}
+.sw input{vertical-align:-2px;margin-right:.3rem}
+.sw:has(input:checked){background:var(--acc);color:#222;border-color:#fff;font-weight:700}
+#voceSel{max-width:210px;font-size:.85rem;padding:.15rem .35rem;border-radius:14px;border:1px solid rgba(255,255,255,.55);background:#fff;color:#222;font-family:inherit}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;background:#fff;padding:.6rem;position:sticky;top:0;z-index:10;border-bottom:2px solid var(--blu)}
+nav button{border:2px solid var(--blu);background:#fff;color:var(--blu);border-radius:20px;padding:.42rem .85rem;font-size:.95rem;cursor:pointer;font-weight:600;font-family:inherit}
+nav button.attivo,nav button:hover{background:var(--blu);color:#fff}
+main{max-width:960px;margin:auto;padding:1rem}
+section.card{background:#fff;border-radius:12px;padding:1.2rem 1.3rem;margin:1rem 0;box-shadow:0 2px 8px rgba(0,0,0,.08);display:none}
+section.card.visibile{display:block}
+h2{color:var(--blu);margin-top:0;font-size:1.4rem}
+h2:focus{outline:3px dashed var(--acc);outline-offset:4px}
+h3{color:var(--blu)}
+.box{background:var(--azz);border-left:6px solid var(--blu);padding:.8rem 1rem;border-radius:0 8px 8px 0;margin:.8rem 0}
+.box.acc{border-color:var(--acc);background:#fef6e3}
+.esempio{background:#fff;border:2px dashed var(--blu);border-radius:8px;padding:.8rem;margin:.6rem 0}
+button.btn{background:var(--blu);color:#fff;border:none;border-radius:8px;padding:.6rem 1.1rem;font-size:1rem;cursor:pointer;margin:.3rem .2rem;font-family:inherit}
+button.btn2{background:var(--acc);color:#222;font-weight:700}
+button.btn:hover{opacity:.88}
+button.btn:disabled{opacity:.5;cursor:not-allowed}
+button.btn.rec{background:var(--ko)}
+button.btn.mini{padding:.35rem .7rem;font-size:.9rem}
+.gloss{border-bottom:2px dotted var(--acc);cursor:pointer;font-weight:600}
+.gloss:hover{background:#fef6e3}
+.gloss:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.grid{display:grid;gap:.7rem}
+@media(min-width:700px){.grid3{grid-template-columns:1fr 1fr 1fr}.grid2{grid-template-columns:1fr 1fr}}
+.ris{border-radius:8px;padding:.8rem;margin-top:.6rem;display:none}
+.ris.show{display:block}
+.vf-ok,.ok-box{background:#e7f5ec;border-left:6px solid var(--ok)}
+.vf-no,.no-box{background:#fdeceb;border-left:6px solid var(--ko)}
+/* timeline */
+.tl{position:relative;padding-left:1.9rem;margin:1rem 0}
+.tl:before{content:"";position:absolute;left:.7rem;top:.6rem;bottom:.6rem;width:3px;background:#cfe0f0}
+.tl button{display:block;position:relative;width:100%;text-align:left;background:#fff;border:2px solid var(--blu);border-radius:10px;padding:.6rem .8rem .6rem 2rem;margin:.55rem 0;cursor:pointer;font-size:1rem;font-family:inherit}
+.tl button:before{content:"";position:absolute;left:-1.55rem;top:1rem;width:15px;height:15px;border-radius:50%;background:var(--acc);border:3px solid var(--blu)}
+.tl button b{color:var(--blu)}
+.tl button[aria-pressed="true"]{background:var(--blu);color:#fff}
+.tl button[aria-pressed="true"] b{color:#fff}
+.tl-det{background:#fff;border:2px solid var(--blu);border-radius:10px;padding:.9rem;margin:.4rem 0 .9rem}
+/* vero/falso */
+.vf{border:1px solid #ddd;border-radius:8px;padding:.75rem;margin:.6rem 0;background:#fff}
+.vf .btns{display:flex;gap:.6rem;margin-top:.55rem}
+.vf .btns button{flex:1;background:#fff;color:var(--blu);border:2px solid var(--blu)}
+.vf .btns button:disabled{opacity:1}
+.vf .btns button.okb{background:var(--ok);border-color:var(--ok);color:#fff}
+.vf .btns button.kob{background:var(--ko);border-color:var(--ko);color:#fff}
+/* mappa */
+.numeri{font-size:1.15rem;background:var(--azz);border:2px dashed var(--blu);border-radius:10px;padding:.7rem;text-align:center}
+.mappa{display:flex;flex-direction:column;gap:.6rem;margin:.8rem 0}
+@media(min-width:760px){.mappa{flex-direction:row;align-items:stretch}}
+.blocco{border:2px solid var(--blu);background:var(--azz);border-radius:10px;padding:.75rem;cursor:pointer;text-align:center;flex:1;min-height:86px;font-family:inherit;font-size:.98rem;color:#222}
+@media(min-width:760px){.blocco{flex:var(--f) 1 0}}
+.blocco b{display:block;font-size:1.05rem;color:var(--blu)}
+.blocco[aria-pressed="true"]{background:var(--blu);color:#fff}
+.blocco[aria-pressed="true"] b{color:#fff}
+.chip{display:inline-block;border:2px solid var(--blu);background:#fff;border-radius:20px;padding:.35rem .8rem;margin:.25rem;cursor:pointer;font-weight:600;font-size:.95rem;font-family:inherit;color:var(--blu)}
+.chip.sel{background:var(--acc);border-color:var(--bronzo);color:#222}
+.chip.ok{background:var(--ok);border-color:var(--ok);color:#fff;cursor:default;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--blu);color:#fff}
+#slots{display:grid;gap:.6rem;grid-template-columns:1fr}
+@media(min-width:700px){#slots{grid-template-columns:1fr 1fr}}
+.slot{border:2px dashed var(--blu);border-radius:10px;min-height:74px;padding:.5rem;background:#fff;cursor:pointer}
+.slot:hover{background:var(--azz)}
+.slot h4{margin:.1rem 0 .3rem;font-size:.98rem;color:var(--blu)}
+.slot .vuoto{color:#98a2ad;font-size:.9rem}
+#chips{margin:.5rem 0}
+#exmsg{min-height:1.6rem;font-weight:700;margin:.4rem 0}
+/* carte caratteristiche */
+.flip{background:none;border:none;padding:0;perspective:900px;cursor:pointer;font-family:inherit;width:100%}
+.flip .in{display:block;position:relative;width:100%;height:210px;transform-style:preserve-3d;transition:transform .5s}
+.flip.girata .in{transform:rotateY(180deg)}
+.flip .f,.flip .r{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;border:2px solid var(--blu);padding:.8rem;overflow:auto;font-size:.94rem;line-height:1.45}
+.flip .f{background:var(--azz);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.flip .f .ic{font-size:2rem}
+.flip .f .nm{font-weight:800;color:var(--blu);font-size:1.15rem;margin-top:.3rem}
+.flip .f .hint{font-size:.8rem;color:#5b6b7c;margin-top:.5rem}
+.flip .r{background:#fff;transform:rotateY(180deg);text-align:left}
+@media(prefers-reduced-motion:reduce){.flip .in{transition:none}}
+/* simulatore */
+.sim-step{border:1px solid #ddd;border-radius:10px;padding:.85rem;margin:.7rem 0;background:#fff}
+.sim-step h4{margin:.1rem 0 .45rem;color:var(--blu)}
+.sim-step .btns{display:flex;flex-wrap:wrap;gap:.5rem}
+.esito{margin-top:.6rem;padding:.6rem .7rem;border-radius:6px;display:none}
+.esito:empty{display:none}
+.esito.ok,.esito.no{display:block}
+.esito.ok{background:#e7f5ec;border-left:5px solid var(--ok)}
+.esito.no{background:#fdeceb;border-left:5px solid var(--ko)}
+/* articoli */
+.filtri{display:flex;flex-wrap:wrap;gap:.3rem;margin:.6rem 0}
+.conta{font-weight:700;color:var(--blu);margin:.5rem 0 .2rem}
+.barra{height:12px;background:#e3e7ec;border-radius:6px;overflow:hidden;margin:.4rem 0 .8rem}
+.barra div{height:100%;background:var(--ok);width:0%;transition:width .35s}
+.artgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
+.artbtn{border:2px solid var(--blu);background:#fff;border-radius:10px;padding:.6rem .4rem;cursor:pointer;text-align:center;font-family:inherit;font-size:.92rem;line-height:1.3;color:#222}
+.artbtn .n{display:block;font-size:1.35rem;font-weight:800;color:var(--blu)}
+.artbtn.letto{background:#eaf6ee;border-color:var(--ok)}
+.artbtn[aria-pressed="true"]{background:var(--blu);color:#fff;box-shadow:0 0 0 3px #cfe0f0}
+.artbtn[aria-pressed="true"] .n{color:#fff}
+.det{border:2px solid var(--blu);border-radius:12px;padding:1rem;background:#fff;margin-top:.9rem}
+.det h3{margin:.3rem 0 .5rem}
+.tema{display:inline-block;background:var(--acc);color:#222;border-radius:20px;padding:.15rem .7rem;font-size:.85rem;font-weight:700}
+details.uff{border:1px solid #ddd;border-radius:8px;padding:.5rem .7rem;margin:.7rem 0;background:#fbfcfe}
+details.uff summary{cursor:pointer;font-weight:700;color:var(--blu)}
+.parola{background:var(--azz);border-radius:8px;padding:.5rem .7rem;margin:.5rem 0}
+.detbtns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-top:.7rem}
+.chk{font-size:.95rem;cursor:pointer}
+body.facilitata .t-simp{display:none}
+body.facilitata .t-simp.gloss{display:none}
+body:not(.facilitata) .t-fac{display:none}
+.t-fac{display:block;background:#fffdf3;border:2px dashed var(--acc);border-radius:8px;padding:.7rem;margin:.5rem 0}
+/* casi */
+.caso label{display:block;background:#f1f4f8;border-radius:6px;padding:.45rem .7rem;margin:.3rem 0;cursor:pointer}
+.caso label:hover{background:var(--azz)}
+.caso.ok{border-left:6px solid var(--ok)}
+.caso.no{border-left:6px solid var(--ko)}
+.caso label:has(input:disabled){cursor:default}
+.caso label:has(input:checked){background:#dfeaf7;font-weight:600}
+/* quiz */
+.qd{border:1px solid #ddd;border-radius:8px;padding:.75rem;margin:.7rem 0;background:#fff}
+.qd label{display:block;background:#f1f4f8;border-radius:6px;padding:.45rem .7rem;margin:.3rem 0;cursor:pointer}
+.qd label:hover{background:var(--azz)}
+.qd.ok{border-left:6px solid var(--ok)}
+.qd.no{border-left:6px solid var(--ko)}
+.qd label:has(input:disabled){cursor:default}
+.open-box{background:#fff;border:1px solid #ddd;border-radius:8px;padding:.8rem;margin:.7rem 0}
+.open-box textarea{width:100%;font-family:inherit;font-size:1rem;padding:.5rem;border:2px solid #cfd8e0;border-radius:8px;line-height:1.5}
+.rubric label{display:block;background:#fef6e3;border:1px solid #f0e2c4;border-radius:6px;padding:.45rem .7rem;margin:.3rem 0;cursor:pointer}
+/* sfida */
+.sfida{border:3px solid var(--acc);border-radius:12px;padding:1rem;background:#fffdf6;margin-top:1rem}
+/* badge */
+.badge{display:inline-block;background:var(--azz);border:2px solid var(--blu);border-radius:20px;padding:.3rem .75rem;margin:.2rem;font-weight:600;font-size:.92rem;color:var(--blu)}
+.badge.off{opacity:.4;filter:grayscale(1)}
+footer{text-align:center;padding:1rem;color:#555;font-size:.9rem}
+#toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--blu);color:#fff;padding:.7rem 1.1rem;border-radius:30px;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .3s;z-index:60;max-width:92vw;text-align:center;font-size:.95rem}
+#toast.on{opacity:1}
+dialog{border:none;border-radius:12px;max-width:520px;box-shadow:0 10px 40px rgba(0,0,0,.3);padding:1.2rem}
+dialog::backdrop{background:rgba(26,58,95,.55)}
+/* scheda stampabile */
+.sheet{background:#fff;border:2px solid var(--blu);border-radius:12px;padding:1.1rem}
+.sheet-h{display:none;text-align:center;border-bottom:3px double var(--blu);padding-bottom:.5rem;margin-bottom:.7rem}
+.sheet h3{font-size:1.05rem;margin:1rem 0 .35rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}
+.riga{margin:.2rem 0}
+.righe{margin:.3rem 0;padding-left:1.2rem}
+.righe li{margin:.25rem 0}
+.tab{width:100%;border-collapse:collapse;font-size:.92rem}
+.tab th,.tab td{border:1px solid #b9c4d0;padding:.35rem .45rem;text-align:left;vertical-align:top}
+.tab th{background:var(--azz);color:var(--blu)}
+.tab td:first-child{font-weight:800;white-space:nowrap}
+.linea{border-bottom:1px solid #999;height:1.7rem;margin:.5rem 0}
+@media print{
+ .skip,nav,header,footer,.no-print,#toast,dialog{display:none!important}
+ body{background:#fff;font-size:12pt}
+ main{padding:0;max-width:none}
+ section.card{display:none!important;box-shadow:none;padding:0;margin:0}
+ #s7{display:block!important}
+ .sheet{border:none;padding:0}
+ .sheet-h{display:block}
+ h2{display:none}
+ h3{color:#000}
+ .tab td,.tab th{border-color:#555}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Salta al contenuto</a>
+<header>
+<h1>🇮🇹 La Costituzione italiana</h1>
+<p>Struttura, caratteristiche e i <b>primi 12 articoli</b> — Tool interattivo per classe 2ª AFM</p>
+<div class="prog"><div class="prog-b"><i id="progb"></i></div></div>
+<p class="progtxt">Tappe completate: <b id="progt">0</b> / 7</p>
+<div class="tools no-print">
+ <label class="sw" for="voceSel">🔊 Voce <select id="voceSel" aria-label="Voce da usare per l'ascolto"></select></label>
+ <label class="sw"><input type="checkbox" id="lettaFac"> 📖 Lettura facilitata</label>
+ <button type="button" id="audioStop">🔇 Ferma audio</button>
+ <button type="button" id="resetBtn">↺ Azzera progressi</button>
+</div>
+</header>
+<nav class="no-print" id="menu">
+ <button type="button" data-t="s1" class="attivo">1. 1946</button>
+ <button type="button" data-t="s2">2. Mappa</button>
+ <button type="button" data-t="s3">3. Caratteristiche</button>
+ <button type="button" data-t="s4">4. 12 articoli</button>
+ <button type="button" data-t="s5">5. Casi concreti</button>
+ <button type="button" data-t="s6">6. Verifica</button>
+ <button type="button" data-t="s7">7. 📄 Ripasso</button>
+</nav>
+<main id="main" tabindex="-1">
+<noscript><p class="box acc">Questo tool richiede JavaScript per funzionare: attivalo nel browser.</p></noscript>
+
+<!-- TAPPA 1 -->
+<section id="s1" class="card visibile">
+<h2>1. 1946–1948: la nascita della Costituzione</h2>
+<p><span class="t-simp">Dopo la <b>Seconda guerra mondiale</b> e la caduta del fascismo l'Italia deve ricostruire il Paese, ma anche le sue regole. Il <b>2 giugno 1946</b> votano per la prima volta anche le donne: gli elettori scelgono tra <b>Repubblica</b> e <b>Monarchia</b> ed eleggono l'<span class="gloss" data-g="costituente">Assemblea Costituente</span>, il gruppo di parlamentari che dovrà scrivere la nuova Costituzione.</span><span class="t-fac">L'Italia è uscita dalla guerra: servono regole nuove. Nel <b>2 giugno 1946</b> votano per la prima volta anche le donne e si sceglie tra Repubblica e Monarchia. Vengono eletti i parlamentari che scriveranno la Costituzione.</span></p>
+<div class="tl" id="tl" role="group" aria-label="Timeline della nascita della Costituzione"></div>
+<div class="tl-det" id="tl-det" aria-live="polite">Clicca una tappa della timeline per leggere il dettaglio.</div>
+<div class="box acc"><b>Lo sapevi?</b> Prima c'era lo <span class="gloss" data-g="statuto">Statuto Albertino</span> (1848): era <b>flessibile</b>, cioè si poteva modificare come una legge qualunque. La nuova Costituzione è invece <b>rigida</b>: molto più difficile da cambiare.</div>
+<div class="box"><b>La frase chiave:</b> la Costituzione è la <b>legge delle leggi</b>: sta al vertice delle fonti del diritto e stabilisce come si può fare una legge e quali limiti deve rispettare.</div>
+<h3>🎯 Mini-verifica: vero o falso</h3>
+<div id="vf1" class="no-print"></div>
+<button type="button" class="btn" onclick="vai('s2','s1')">Avanti: la mappa della Costituzione →</button>
+</section>
+
+<!-- TAPPA 2 -->
+<section id="s2" class="card">
+<h2>2. La mappa: com'è fatta la Costituzione</h2>
+<p class="numeri"><b>139 articoli</b> + <b>18 disposizioni</b> transitorie e finali = <b>4 parti</b></p>
+<p class="t-simp">Clicca sui quattro blocchi per scoprire cosa contengono.</p>
+<p class="t-fac">La Costituzione ha 139 articoli e 18 disposizioni, in 4 parti. Clicca su un blocco per vedere cosa c'è dentro.</p>
+<div class="mappa" id="mappa">
+ <button type="button" class="blocco" style="--f:12" data-p="p1" aria-pressed="false"><b>Principi fondamentali</b>artt. 1–12</button>
+ <button type="button" class="blocco" style="--f:42" data-p="p2" aria-pressed="false"><b>Parte I</b>Diritti e doveri dei cittadini — artt. 13–54</button>
+ <button type="button" class="blocco" style="--f:85" data-p="p3" aria-pressed="false"><b>Parte II</b>Ordinamento della Repubblica — artt. 55–139</button>
+ <button type="button" class="blocco" style="--f:18" data-p="p4" aria-pressed="false"><b>Disposizioni finali</b>transitorie e finali — I–XVIII</button>
+</div>
+<div class="box" id="map-det" aria-live="polite">Clicca un blocco per vedere i dettagli.</div>
+<div class="box acc"><b>Perché i primi 12 articoli?</b> Perché contengono i <b>valori fondamentali</b> su cui si regge tutta la Repubblica: non spiegano come funzionano le istituzioni, ma <b>chi siamo</b> e <b>cosa vogliamo</b>.</div>
+<h3>🎯 Esercizio: metti al posto giusto</h3>
+<p>Clicca un'etichetta, poi clicca la parte della Costituzione in cui appartiene.</p>
+<div id="chips"></div>
+<div id="slots"></div>
+<p id="exmsg" aria-live="polite"></p>
+<button type="button" class="btn" onclick="vai('s3','s2')">Avanti: le caratteristiche →</button>
+</section>
+<!-- TAPPA 3 -->
+<section id="s3" class="card">
+<h2>3. Le 7 caratteristiche della Costituzione</h2>
+<p class="t-simp">Clicca su ogni carta per girarla: davanti il nome, dietro la spiegazione con un esempio.</p>
+<p class="t-fac">Clicca sulle carte per girarle: davanti c'è il nome, dietro la spiegazione.</p>
+<div class="grid grid3 no-print" id="caratteri"></div>
+<h3>🎯 Vero o falso</h3>
+<div id="vf3" class="no-print"></div>
+<h3>⚖️ Simulatore: si può modificare la Costituzione?</h3>
+<p>Segui i passaggi dell'<b>art. 138</b> e scopri perché la Costituzione è <b>rigida</b>.</p>
+<div class="sim-step" id="st1">
+ <h4>Passo 1 — Si presenta la proposta</h4>
+ <p>Possono presentare una <b>legge di revisione costituzionale</b>: il Governo, almeno 1/5 dei membri di una Camera, 500.000 elettori oppure 5 Consigli regionali.</p>
+ <button type="button" class="btn" onclick="simVai2()">Avanti →</button>
+</div>
+<div class="sim-step" id="st2" hidden>
+ <h4>Passo 2 — Prima deliberazione di ciascuna Camera</h4>
+ <p>Serve subito la maggioranza dei 2/3 dei componenti?</p>
+ <div class="btns">
+  <button type="button" class="btn" onclick="simQ2('s')">Sì, sempre il 2/3</button>
+  <button type="button" class="btn" onclick="simQ2('n')">No, basta la maggioranza assoluta</button>
+ </div>
+ <div class="esito" aria-live="polite"></div>
+</div>
+<div class="sim-step" id="st3" hidden>
+ <h4>Passo 3 — Pausa obbligatoria</h4>
+ <p>Passano <b>almeno 3 mesi</b> tra la prima e la seconda deliberazione: così il dibattito è aperto e i cittadini possono leggere il testo.</p>
+ <button type="button" class="btn" onclick="simVai4()">Avanti →</button>
+</div>
+<div class="sim-step" id="st4" hidden>
+ <h4>Passo 4 — Seconda deliberazione</h4>
+ <p>La seconda approvazione è avvenuta… quale esito?</p>
+ <div class="btns">
+  <button type="button" class="btn" onclick="simQ4('a')">Con 2/3 dei componenti</button>
+  <button type="button" class="btn" onclick="simQ4('b')">Con la maggioranza assoluta (meno di 2/3)</button>
+  <button type="button" class="btn" onclick="simQ4('c')">Con meno della maggioranza assoluta</button>
+ </div>
+ <div class="esito" aria-live="polite"></div>
+</div>
+<div class="sim-step" id="st5" hidden>
+ <h4>🏁 Esito raggiunto</h4>
+ <p>La <b>revisione costituzionale</b> richiede quindi due deliberazioni per ciascuna Camera, una pausa di 3 mesi e maggioranze molto larghe. Inoltre l'<b>art. 139</b> fissa un limite invalicabile: la <b>forma repubblicana non può essere oggetto di revisione costituzionale</b>.</p>
+ <button type="button" class="btn btn2" onclick="simReset()">↻ Ricomincia il simulatore</button>
+</div>
+<div class="box acc"><b>Perché è rigida?</b> Perché una legge ordinaria non basta: servono un procedimento lungo (art. 138) e ci sono cose che non si possono cambiare (art. 139).</div>
+<button type="button" class="btn" onclick="vai('s4','s3')">Avanti: i 12 principi →</button>
+</section>
+
+<!-- TAPPA 4 -->
+<section id="s4" class="card">
+<h2>4. I 12 principi fondamentali</h2>
+<p><span class="t-simp">I primi 12 articoli sono il <b>cuore</b> della Costituzione. Scegli un articolo: potrai leggere il testo ufficiale, la spiegazione semplice, un esempio concreto e ascoltarlo ad alta voce.</span><span class="t-fac">Qui trovi i 12 articoli più importanti. Clicca su un numero: leggi, ascolta e segna quelli che hai letto.</span></p>
+<div class="filtri no-print" id="filtri" role="group" aria-label="Filtra gli articoli per tema"></div>
+<p class="conta">Articoli letti: <b id="lettiN">0</b> / 12</p>
+<div class="barra no-print"><div id="barraLet"></div></div>
+<div class="artgrid" id="artgrid"></div>
+<div class="det" id="art-det" aria-live="polite">Seleziona un articolo qui sopra per aprirne la scheda.</div>
+<div class="box acc no-print"><b>🔊 Non senti l'audio?</b> 1) Apri il file con il <b>doppio clic</b>, nell'app di navigazione del computer (non nell'anteprima). 2) Controlla che la finestra sia <b>in primo piano</b>. 3) Se non parte ancora, nel computer manca la <b>voce italiana</b>: in Windows vai su Impostazioni → Ora e lingua → Lingua → Opzioni voce e aggiungi il pacchetto italiano.</div>
+<button type="button" class="btn" onclick="vai('s5','s4')">Avanti: i casi concreti →</button>
+</section>
+<!-- TAPPA 5 -->
+<section id="s5" class="card">
+<h2>5. Casi concreti: trova l'articolo</h2>
+<p><span class="t-simp">10 situazioni concrete. Scegli l'articolo più adatto: dopo la risposta leggerai <b>il perché</b> e potrai aprire la scheda dell'articolo.</span><span class="t-fac">10 situazioni vere. Scegli l'articolo giusto e leggi subito la spiegazione.</span></p>
+<p>Risposte corrette: <b id="casiOk">0</b> / 10 &nbsp;•&nbsp; risposte date: <b id="casiRisp">0</b> / 10</p>
+<div class="barra no-print"><div id="barraCasi"></div></div>
+<div id="casi"></div>
+<div class="box acc"><b>Consiglio:</b> non serve imparare a memoria i numeri. Serve riconoscere la <b>parola chiave</b> di ogni articolo: lavoro, uguaglianza, autonomie, ambiente, pace…</div>
+<button type="button" class="btn" onclick="vai('s6','s5')">Avanti: la verifica →</button>
+</section>
+
+<!-- TAPPA 6 -->
+<section id="s6" class="card">
+<h2>6. Verifica finale</h2>
+<p><span class="t-simp">10 domande a scelta multipla (6 punti) + 2 casi aperti con autovalutazione su rubrica (4 punti) = <b>10 punti</b>.</span><span class="t-fac">10 domande + 2 casi: totale 10 punti. Rispondi, poi correggi e assegna i punti con la rubrica.</span></p>
+<div class="barra no-print"><div id="bar"></div></div>
+<p>Punteggio: <b id="punteggio">–</b> / 10 &nbsp;•&nbsp; Migliore: <b id="best">0</b> / 10</p>
+<div id="quiz"></div>
+
+<h3>✍️ 2 casi aperti (4 punti)</h3>
+<div class="open-box">
+ <b>Caso 1 — Pari opportunità in azienda</b>
+ <p>Un'impresa non assume una candidata perché è donna e perché ha due figli. <b>Quale articolo della Costituzione viene violato?</b> Spiega con parole tue e aggiungi un esempio.</p>
+ <textarea id="ap1" rows="3" placeholder="Scrivi qui la tua risposta…" aria-label="Risposta al caso 1"></textarea>
+ <div class="no-print"><button type="button" class="btn btn2" onclick="mostraModello('m1')">Mostra risposta modello</button></div>
+ <div id="m1" class="ris box acc" aria-live="polite"></div>
+ <div class="rubric" id="r1">
+  <p class="parola"><b>Rubrica:</b> assegna i punti leggendo il tuo testo.</p>
+  <label><input type="radio" name="o1" value="2"> 2 punti — indichi l'art. 3, spieghi il principio e porti un esempio</label>
+  <label><input type="radio" name="o1" value="1"> 1 punto — indichi l'art. 3 ma la spiegazione è generica</label>
+  <label><input type="radio" name="o1" value="0"> 0 punti — articolo errato o risposta assente</label>
+ </div>
+</div>
+<div class="open-box">
+ <b>Caso 2 — Un teatro da abbattere</b>
+ <p>Il Comune vuole abbattere un antico teatro per costruire un parcheggio. <b>In che modo la Costituzione si oppone?</b> Argomenta citando un articolo.</p>
+ <textarea id="ap2" rows="3" placeholder="Scrivi qui la tua risposta…" aria-label="Risposta al caso 2"></textarea>
+ <div class="no-print"><button type="button" class="btn btn2" onclick="mostraModello('m2')">Mostra risposta modello</button></div>
+ <div id="m2" class="ris box acc" aria-live="polite"></div>
+ <div class="rubric" id="r2">
+  <p class="parola"><b>Rubrica:</b> assegna i punti leggendo il tuo testo.</p>
+  <label><input type="radio" name="o2" value="2"> 2 punti — citi l'art. 9, spieghi cosa tutela e lo colleghi al caso</label>
+  <label><input type="radio" name="o2" value="1"> 1 punto — citi l'art. 9 senza argomentare</label>
+  <label><input type="radio" name="o2" value="0"> 0 punti — articolo errato o risposta assente</label>
+ </div>
+</div>
+<div class="no-print">
+ <button type="button" class="btn btn2" onclick="correggi()">📝 Correggi tutto</button>
+ <button type="button" class="btn" onclick="location.reload()">↺ Ricomincia la verifica</button>
+</div>
+<div id="feed" class="ris" aria-live="polite"></div>
+<h3 class="no-print">🏅 I miei traguardi</h3>
+<div id="badges" class="no-print"></div>
+<h3 class="no-print">⚡ Modalità sfida</h3>
+<p class="no-print">10 domande prese da casi e quiz, con risposta immediata: perfetta per il ripasso. <b>Nessun timer</b>: conta la riflessione, non la velocità.</p>
+<div class="no-print"><button type="button" class="btn btn2" onclick="montaSfida()">🚀 Avvia la sfida</button></div>
+<div id="sfida" class="sfida no-print" hidden></div>
+<button type="button" class="btn" onclick="vai('s7','s6')">Avanti: scheda di ripasso →</button>
+</section>
+
+<!-- TAPPA 7 -->
+<section id="s7" class="card">
+<h2>7. 📄 Scheda di ripasso</h2>
+<div class="box no-print">Clicca <b>Stampa / Salva PDF</b>: in stampa esce <b>solo questa scheda</b> (1–2 pagine), senza menu né pulsanti.</div>
+<div class="sheet">
+ <div class="sheet-h"><b>LA COSTITUZIONE ITALIANA — I PRIMI 12 ARTICOLI</b><br>Classe 2ª AFM • Diritto ed Economia</div>
+ <h3>I 4 numeri chiave</h3>
+ <p class="riga"><b>139</b> articoli &nbsp;•&nbsp; <b>18</b> disposizioni transitorie e finali &nbsp;•&nbsp; <b>4</b> parti &nbsp;•&nbsp; in vigore dal <b>1° gennaio 1948</b></p>
+ <p class="riga">Struttura: Principi fondamentali (1–12) • Parte I Diritti e doveri (13–54) • Parte II Ordinamento (55–139) • Disposizioni finali (I–XVIII)</p>
+ <h3>Le 7 caratteristiche</h3>
+ <ul class="righe">
+  <li><b>Scritta</b> — testo unico, pubblicato e consultabile da tutti.</li>
+  <li><b>Rigida</b> — serve il procedimento dell'art. 138; la forma repubblicana non si tocca (art. 139).</li>
+  <li><b>Lunga</b> — 139 articoli + 18 disposizioni: diritti e organizzazione insieme.</li>
+  <li><b>Compromissoria</b> — compromesso tra culture politiche diverse.</li>
+  <li><b>Democratica</b> — la sovranità appartiene al popolo (art. 1).</li>
+  <li><b>Programmatica</b> — indica obiettivi da raggiungere (art. 3, 4, 9).</li>
+  <li><b>Suprema</b> — al vertice delle fonti: nessuna legge può contraddirla.</li>
+ </ul>
+ <h3>I 12 principi fondamentali</h3>
+ <table class="tab">
+  <tr><th>Art.</th><th>Parola chiave</th><th>In una frase</th></tr>
+  <tr><td>1</td><td>Democrazia e lavoro</td><td>Repubblica democratica fondata sul lavoro; la sovranità appartiene al popolo.</td></tr>
+  <tr><td>2</td><td>Persona e solidarietà</td><td>Diritti inviolabili della persona, anche nei gruppi; doveri di solidarietà.</td></tr>
+  <tr><td>3</td><td>Uguaglianza</td><td>Pari dignità davanti alla legge e rimozione degli ostacoli concreti.</td></tr>
+  <tr><td>4</td><td>Diritto al lavoro</td><td>Diritto al lavoro promosso dallo Stato; dovere di svolgere un'attività utile.</td></tr>
+  <tr><td>5</td><td>Unità e autonomie</td><td>Repubblica una e indivisibile; autonomie locali e decentramento.</td></tr>
+  <tr><td>6</td><td>Minoranze linguistiche</td><td>La Repubblica tutela con apposite norme le minoranze linguistiche.</td></tr>
+  <tr><td>7</td><td>Stato e Chiesa cattolica</td><td>Indipendenti e sovrani; rapporti regolati dai Patti Lateranensi.</td></tr>
+  <tr><td>8</td><td>Libertà religiosa</td><td>Tutte le confessioni sono ugualmente libere; intese con lo Stato.</td></tr>
+  <tr><td>9</td><td>Cultura e ambiente</td><td>Cultura, ricerca, paesaggio, patrimonio, ambiente, biodiversità, animali.</td></tr>
+  <tr><td>10</td><td>Diritto internazionale</td><td>Conformità al diritto internazionale; legge sullo straniero; diritto d'asilo.</td></tr>
+  <tr><td>11</td><td>Pace</td><td>Ripudio della guerra; limiti di sovranità per la pace; organizzazioni internazionali.</td></tr>
+  <tr><td>12</td><td>Tricolore</td><td>Bandiera verde, bianca e rossa a tre bande verticali di eguali dimensioni.</td></tr>
+ </table>
+ <h3>3 domande guida</h3>
+ <ol class="righe">
+  <li>Perché la Costituzione è <b>rigida</b> e cosa cambia rispetto a una legge ordinaria?</li>
+  <li>Quali differenze ci sono tra <b>uguaglianza formale</b> e <b>uguaglianza sostanziale</b>? Fai un esempio dal mondo del lavoro.</li>
+  <li>Perché l'<b>art. 11</b> è importante anche per un'impresa che lavora in Europa?</li>
+ </ol>
+ <h3>I miei 3 dubbi</h3>
+ <div class="linea"></div><div class="linea"></div><div class="linea"></div>
+</div>
+<div class="no-print">
+ <button type="button" class="btn" onclick="window.print()">🖨️ Stampa / Salva PDF</button>
+ <button type="button" class="btn btn2" onclick="vai('s1')">↺ Ricomincia il percorso</button>
+</div>
+</section>
+</main>
+<footer>2ª AFM — Diritto ed Economia • File unico, funziona offline • Fonti: Senato della Repubblica, Presidenza della Repubblica, Normattiva • Glossario: clicca le parole sottolineate</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="dlg"><h3 id="dlg-t"></h3><p id="dlg-p"></p><button type="button" class="btn" onclick="document.getElementById('dlg').close()">Chiudi</button></dialog>
+<script>
+/* ===== utilità ===== */
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const store={
+ g(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+ s(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+let tappe=store.g('cost2afm_tappe',{})||{};
+let badges=store.g('cost2afm_badge',{})||{};
+let letti=store.g('cost2afm_letti',[])||[];
+
+/* ===== avanzamento e badge ===== */
+function prog(){
+ const n=['s1','s2','s3','s4','s5','s6','s7'].filter(k=>tappe[k]).length;
+ $('#progb').style.width=(n/7*100)+'%';
+ $('#progt').textContent=n;
+}
+const BL={storico:'🕰️ Storico',cartografo:'🗺️ Cartografo',cost:'⚖️ Costituzionalista',afm:'💼 Cittadino AFM',esperto:'🏛️ Esperto'};
+function badgeUI(){
+ $('#badges').innerHTML=Object.keys(BL).map(k=>`<span class="badge ${badges[k]?'':'off'}">${badges[k]?'✓ ':''}${BL[k]}</span>`).join('');
+}
+function premia(k){
+ if(badges[k])return;
+ badges[k]=1;store.s('cost2afm_badge',badges);badgeUI();
+ toast('🏅 Nuovo traguardo: '+BL[k]);
+}
+let tT;
+function toast(m){
+ const t=$('#toast');t.textContent=m;t.classList.add('on');
+ clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('on'),2600);
+}
+
+/* ===== navigazione ===== */
+function vai(id,da){
+ if(da){tappe[da]=1;store.s('cost2afm_tappe',tappe);prog();}
+ $$('#menu button').forEach(b=>b.classList.toggle('attivo',b.dataset.t===id));
+ $$('section.card').forEach(s=>{const v=s.id===id;s.classList.toggle('visibile',v);s.setAttribute('aria-hidden',v?'false':'true');});
+ window.scrollTo(0,0);
+ const h=$('#'+id+' h2');
+ if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true})}catch(e){h.focus()}}
+}
+$$('#menu button').forEach(b=>b.onclick=()=>vai(b.dataset.t));
+
+/* ===== glossario ===== */
+const G={
+ costituente:"L'Assemblea eletta nel 1946 con il compito di scrivere la nuova Costituzione.",
+ statuto:"Lo Statuto Albertino (1848), la costituzione del Regno: era flessibile, modificabile come una legge ordinaria.",
+ sovranita:"Il potere di dare le regole e di governare. Nella Repubblica appartiene al popolo (art. 1).",
+ inviolabile:"Che nessuna legge può cancellare o limitare.",
+ formazioni:"I gruppi in cui la persona vive e si sviluppa: famiglia, sindacati, partiti, associazioni, cooperative, comunità religiose.",
+ solidarieta:"Il dovere di aiutare chi ha bisogno, in politica, in economia e nella società.",
+ sostanziale:"Uguaglianza reale: non basta la parità sulla carta, bisogna togliere gli ostacoli concreti.",
+ decentramento:"Lo Stato trasferisce le sue funzioni a Regioni, Province e Comuni, che decidono più vicino ai cittadini.",
+ minoranza:"Un gruppo di persone che parla una lingua diversa da quella ufficiale (es. ladino, tedesco, sloveno).",
+ lateransi:"Accordi del 1929 tra Stato italiano e Chiesa cattolica, aggiornati con l'intesa del 1984.",
+ intesa:"Accordo tra lo Stato e una confessione religiosa, approvato con legge ordinaria.",
+ laicita:"Lo Stato non si lega a nessuna religione e le tratta tutte allo stesso modo davanti alla legge.",
+ paesaggio:"L'aspetto visivo del territorio, naturale e culturale, che vale la pena proteggere.",
+ biodiversita:"La varietà degli esseri viventi: animali, piante, microorganismi.",
+ ecosistemi:"Gli ambienti in cui vivono gli esseri viventi e le relazioni tra di loro.",
+ tricolore:"La bandiera italiana: verde, bianco e rosso, a tre bande verticali di eguali dimensioni.",
+ ripudio:"Respingere con fermezza: l'Italia rinuncia alla guerra come strumento di offesa (art. 11).",
+ dirittolavoro:"Diritto di trovare lavoro garantito dalla Repubblica (art. 4), non solo un desiderio privato."
+};
+function glossInit(){
+ $$('.gloss:not([role])').forEach(g=>{
+  g.tabIndex=0;g.setAttribute('role','button');
+  g.setAttribute('aria-label','Definizione di '+g.textContent.trim());
+ });
+}
+function apriGloss(el){
+ $('#dlg-t').textContent=el.textContent.trim();
+ $('#dlg-p').textContent=G[el.dataset.g]||'Termine non trovato nel glossario.';
+ const d=$('#dlg');
+ if(typeof d.showModal==='function')d.showModal();else d.setAttribute('open','');
+}
+document.addEventListener('click',e=>{if(!e.target||!e.target.closest)return;const g=e.target.closest('.gloss');if(g)apriGloss(g)});
+document.addEventListener('keydown',e=>{
+ if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('gloss')){e.preventDefault();apriGloss(e.target);}
+});
+
+/* ===== vero / falso ===== */
+function montaVF(id,dati,cb){
+ const c=$(id);c.innerHTML='';
+ dati.forEach((d,i)=>{
+  const div=document.createElement('div');div.className='vf';
+  div.innerHTML='<b>'+(i+1)+'.</b> '+d.t+
+   '<div class="btns"><button type="button" class="btn" data-v="1">✅ Vero</button>'+
+   '<button type="button" class="btn" data-v="0">❌ Falso</button></div>'+
+   '<div class="ris" aria-live="polite"></div>';
+  const ris=div.querySelector('.ris');
+  div.querySelectorAll('.btn').forEach(b=>b.onclick=()=>{
+   if(div.classList.contains('done'))return;
+   div.classList.add('done');
+   const risp=b.dataset.v==='1',giusto=risp===d.v;
+   ris.className='ris show '+(giusto?'vf-ok':'vf-no');
+   ris.innerHTML=(giusto?'✅ <b>Corretto!</b> ':'❌ <b>Non proprio.</b> ')+d.sp;
+   div.querySelectorAll('.btn').forEach(x=>x.disabled=true);
+   b.classList.add(giusto?'okb':'kob');
+   if(cb)cb(dati,c);
+  });
+  c.appendChild(div);
+ });
+ glossInit();
+}
+
+/* ===== tappa 1: timeline ===== */
+const TL=[
+ {y:'2 giugno 1946',t:'Referendum e Assemblea Costituente',i:'🗳️',d:'Votano per la prima volta anche le donne e gli elettori scelgono tra Repubblica e Monarchia: vince la <b>Repubblica</b>. Stesso giorno si elegge l\'Assemblea Costituente, che dovrà scrivere la nuova Costituzione al posto dello Statuto Albertino.',f:'Votano per la prima volta anche le donne: Repubblica sì, Monarchia no. Si eleggono i parlamentari che scriveranno la Costituzione.'},
+ {y:'22 dicembre 1947',t:'Approvazione',i:'📝',d:'Dopo otto mesi di lavoro l\'Assemblea Costituente approva il testo definitivo con <b>453 voti favorevoli</b>: 139 articoli e 18 disposizioni transitorie e finali.',f:'I parlamentari approvano il testo: 139 articoli.'},
+ {y:'27 dicembre 1947',t:'Promulgazione',i:'📜',d:'La Costituzione è promulgata dal Capo provvisorio dello Stato, <b>Enrico De Nicola</b>, e pubblicata sulla Gazzetta Ufficiale: diventa legge dello Stato.',f:'Firmata dal Capo dello Stato provvisorio e pubblicata.'},
+ {y:'1° gennaio 1948',t:'Entrata in vigore',i:'🏛️',d:'Da questo giorno la Costituzione italiana è <b>in vigore</b> ed è ancora oggi una delle Costituzioni più complete del mondo.',f:'Da oggi è in vigore: è la legge suprema del Paese.'}
+];
+function montaTL(){
+ $('#tl').innerHTML=TL.map((t,i)=>`<button type="button" data-i="${i}" aria-pressed="false"><b>${t.y}</b> — ${t.i} ${t.t}</button>`).join('');
+ $$('#tl button').forEach(b=>b.onclick=()=>{
+  $$('#tl button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  const t=TL[+b.dataset.i];
+  $('#tl-det').innerHTML=`<b>${t.i} ${t.y} — ${t.t}</b><br><span class="t-simp">${t.d}</span><span class="t-fac">${t.f}</span>`;
+ });
+}
+const VF1=[
+ {t:'La Costituzione italiana è entrata in vigore il 1° gennaio 1948.',v:true,sp:'Promulgata il 27 dicembre 1947, è in vigore dal 1° gennaio 1948.'},
+ {t:'La Costituzione italiana fu scritta durante il fascismo.',v:false,sp:'Fu scritta nel 1946–1947, dopo la Seconda guerra mondiale e la caduta del fascismo.'},
+ {t:'Nel 1946 le donne poterono votare per la prima volta a livello nazionale.',v:true,sp:'Proprio il 2 giugno 1946: è il momento in cui nasce la Repubblica.'}
+];
+
+/* ===== tappa 2: mappa ===== */
+const MAP={
+ p1:{t:'Parte non numerata — Principi fondamentali',a:'Articoli 1–12 (12 articoli)',d:'I <b>valori</b> della Repubblica: democrazia, lavoro, diritti, uguaglianza, autonomie, religioni, cultura, ambiente, rapporti internazionali e simboli. È il fondamento di tutto: per questo sono i nostri primi 12 articoli.'},
+ p2:{t:'Parte Prima — Diritti e doveri dei cittadini',a:'Articoli 13–54 (42 articoli)',d:'I diritti <b>civili</b> (libertà personale, domicilio, riunione, associazione, stampa), <b>etico-sociali</b> (famiglia, scuola, salute), <b>economici</b> (lavoro, impresa, sindacati, proprietà) e <b>politici</b> (voto, partecipazione), insieme ai doveri.'},
+ p3:{t:'Parte Seconda — Ordinamento della Repubblica',a:'Articoli 55–139 (85 articoli)',d:'Come funzionano le istituzioni: Parlamento, Presidente della Repubblica, Governo, Magistratura, Regioni e Comuni, Corte costituzionale.'},
+ p4:{t:'Disposizioni transitorie e finali',a:'Numeri I–XVIII (18 disposizioni)',d:'Norme di passaggio per trasformare lo Stato e le vecchie leggi: il ponte tra il passato e il presente.'}
+};
+function infoMap(p,btn){
+ $$('#mappa .blocco').forEach(b=>b.setAttribute('aria-pressed',b===btn?'true':'false'));
+ const m=MAP[p];
+ $('#map-det').innerHTML=`<b>${m.t}</b> — ${m.a}<br>${m.d}`;
+}
+$$('#mappa .blocco').forEach(b=>b.onclick=()=>infoMap(b.dataset.p,b));
+
+const LBL=[
+ {t:'artt. 1–12',p:'p1',done:false},{t:'Principi fondamentali',p:'p1',done:false},
+ {t:'artt. 13–54',p:'p2',done:false},{t:'Diritti e doveri dei cittadini',p:'p2',done:false},
+ {t:'artt. 55–139',p:'p3',done:false},{t:'Ordinamento della Repubblica',p:'p3',done:false},
+ {t:'I–XVIII',p:'p4',done:false},{t:'Disposizioni transitorie e finali',p:'p4',done:false}
+];
+let selL=-1,okL=0;
+const SLOTS=[{p:'p1',h:'Principi fondamentali (1–12)'},{p:'p2',h:'Parte I — Diritti e doveri (13–54)'},{p:'p3',h:'Parte II — Ordinamento (55–139)'},{p:'p4',h:'Disposizioni finali (I–XVIII)'}];
+function montaEx(){
+ if(!$('#slots').dataset.ready){
+  $('#slots').innerHTML=SLOTS.map(s=>`<div class="slot" data-p="${s.p}" data-h="${s.h}" role="button" tabindex="0"><h4>${s.h}</h4></div>`).join('');
+  $$('#slots .slot').forEach(s=>{s.onclick=()=>clickSlot(s.dataset.p);
+   s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();clickSlot(s.dataset.p)}};});
+  $('#slots').dataset.ready='1';
+ }
+ $('#chips').innerHTML=LBL.map((l,i)=>l.done?'':
+  `<button type="button" class="chip${selL===i?' sel':''}" onclick="selChip(${i})">${l.t}</button>`).join('')||'<i>Tutte assegnate!</i>';
+ $$('#slots .slot').forEach(s=>{
+  const p=s.dataset.p;
+  s.innerHTML='<h4>'+s.dataset.h+'</h4>'+LBL.filter(l=>l.done&&l.p===p).map(l=>`<span class="chip ok">${l.t}</span>`).join('');
+ });
+ glossInit();
+}
+function selChip(i){selL=i;montaEx();}
+function clickSlot(p){
+ if(selL<0){$('#exmsg').textContent='Seleziona prima un\'etichetta qui sopra.';return;}
+ const l=LBL[selL];
+ if(l.p===p){
+  l.done=true;selL=-1;okL++;
+  $('#exmsg').innerHTML='✅ Esatto! '+okL+'/8 assegnate.';
+  montaEx();
+  if(okL===LBL.length){
+   $('#exmsg').innerHTML='🎉 <b>Perfetto: 8 su 8!</b> Ora conosci la struttura della Costituzione.';
+   premia('cartografo');
+  }
+ }else{
+  $('#exmsg').innerHTML='❌ Quella etichetta non appartiene a questa parte. Riprova.';
+ }
+}
+/* ===== tappa 3: caratteristiche ===== */
+const CARATTER=[
+ {t:'Scritta',i:'✍️',d:'È un testo scritto, pubblicato e consultabile da tutti: non esiste una Costituzione «non scritta».',e:'139 articoli + 18 disposizioni: puoi scaricarla e leggerla integralmente.'},
+ {t:'Rigida',i:'⚖️',d:'Non si modifica con una legge ordinaria: serve il procedimento speciale dell\'art. 138 e ci sono limiti invalicabili (art. 139).',e:'Il simulatore qui sotto mostra tutti i passaggi della revisione.'},
+ {t:'Lunga',i:'📜',d:'139 articoli + 18 disposizioni finali: oltre a indicare le istituzioni, contiene anche diritti e principi.',e:'Molte costituzioni del mondo hanno solo 20–30 articoli.'},
+ {t:'Compromissoria',i:'🤝',d:'Nasce dall\'incontro tra culture politiche diverse: cattolica, liberale, socialista e comunista.',e:'L\'Assemblea Costituente del 1946 raccoglieva tutti i partiti antifascisti.'},
+ {t:'Democratica',i:'🗳️',d:'La sovranità appartiene al popolo (art. 1) e la Costituzione prevede partecipazione e rappresentanza.',e:'Voto, referendum, partiti, sindacati, libertà di stampa e di riunione.'},
+ {t:'Programmatica',i:'🎯',d:'Non dice solo cosa è vietato: indica gli obiettivi che la Repubblica deve raggiungere.',e:'Art. 3 (rimuovere gli ostacoli), art. 4 (diritto al lavoro), art. 9 (cultura e ambiente).'},
+ {t:'Suprema',i:'🏔️',d:'È al vertice delle fonti del diritto: nessuna legge può contraddirla.',e:'Se una legge viola la Costituzione, la Corte costituzionale la dichiara incostituzionale.'}
+];
+function montaCaratteri(){
+ $('#caratteri').innerHTML=CARATTER.map(c=>`
+  <button type="button" class="flip" aria-pressed="false" aria-label="Carta: ${c.t}. Clicca per girare.">
+   <span class="in">
+    <span class="f"><span class="ic">${c.i}</span><span class="nm">${c.t}</span><span class="hint">clicca per girare ↻</span></span>
+    <span class="r"><b>${c.i} ${c.t}</b><br>${c.d}<br><i style="color:#49708f">Esempio: ${c.e}</i></span>
+   </span>
+  </button>`).join('');
+ $$('#caratteri .flip').forEach(f=>f.onclick=()=>{
+  const g=f.classList.toggle('girata');
+  f.setAttribute('aria-pressed',g?'true':'false');
+ });
+}
+const VF3=[
+ {t:'La Costituzione si può modificare con una legge ordinaria, come qualsiasi altra legge.',v:false,sp:'È <b>rigida</b>: serve il procedimento dell\'art. 138 con due deliberazioni per Camera, pausa di 3 mesi e maggioranze larghe.'},
+ {t:'La Costituzione contiene solo regole su come funzionano le istituzioni.',v:false,sp:'Contiene anche diritti e principi fondamentali: per questo è <b>lunga</b> e <b>programmatica</b>.'},
+ {t:'La sovranità appartiene al popolo.',v:true,sp:'Art. 1: «La sovranità appartiene al popolo, che la esercita nelle forme e nei limiti della Costituzione».'},
+ {t:'La forma repubblicana può essere modificata con la revisione costituzionale.',v:false,sp:'Art. 139: è un limite invalicabile, non può essere oggetto di revisione costituzionale.'},
+ {t:'Alcuni articoli indicano obiettivi da raggiungere: sono norme programmatiche.',v:true,sp:'Es. art. 3 (rimuovere gli ostacoli), art. 4 (diritto al lavoro), art. 9 (cultura e ambiente).'},
+ {t:'La Costituzione fu ispirata da una sola corrente politica.',v:false,sp:'È <b>compromissoria</b>: nasce dall\'incontro di culture diverse dentro l\'Assemblea Costituente.'}
+];
+
+/* ===== simulatore art. 138 ===== */
+function simVai2(){$('#st2').hidden=false;$('#st2').scrollIntoView({block:'nearest'});}
+function simQ2(r){
+ const e=$('#st2 .esito');
+ if(r==='n'){
+  e.className='esito ok';
+  e.innerHTML='✅ <b>Esatto!</b> Alla prima deliberazione basta la <b>maggioranza assoluta</b> dei componenti di ciascuna Camera.';
+  $('#st2').querySelectorAll('button').forEach(b=>b.disabled=true);
+  $('#st3').hidden=false;
+ }else{
+  e.className='esito no';
+  e.innerHTML='❌ <b>Non ancora:</b> alla prima lettura <b>non serve</b> il 2/3. Riprova.';
+ }
+}
+function simVai4(){$('#st4').hidden=false;$('#st4').scrollIntoView({block:'nearest'});}
+function simQ4(r){
+ const e=$('#st4 .esito');let txt;
+ if(r==='a')txt='✅ <b>2/3 dei componenti di ciascuna Camera:</b> la legge costituzionale è promulgata <b>senza referendum</b>.';
+ else if(r==='b')txt='⚠️ <b>Maggioranza assoluta ma meno di 2/3:</b> la legge è promulgata, ma <b>entro 3 mesi</b> si può chiedere il <b>referendum abrogativo</b>.';
+ else txt='❌ <b>Meno della maggioranza assoluta:</b> la proposta <b>non è approvata</b>: senza le maggioranze richieste non si va avanti.';
+ e.className='esito ok';
+ e.innerHTML=txt+'<br><i>Dopo la seconda deliberazione la legge è pubblicata ed entra in vigore.</i>';
+ $('#st4').querySelectorAll('button').forEach(b=>b.disabled=true);
+ $('#st5').hidden=false;
+ premia('cost');
+}
+function simReset(){
+ ['st2','st3','st4','st5'].forEach(id=>{$('#'+id).hidden=true;const e=$('#'+id+' .esito');if(e){e.className='esito';e.innerHTML='';}});
+ $$('#st2 button').forEach(b=>b.disabled=false);
+ $('#st1').scrollIntoView({block:'nearest'});
+}
+
+/* ===== tappa 4: i 12 articoli ===== */
+const TEMI={persona:'Persona e lavoro',autonomie:'Autonomie e minoranze',religioni:'Religioni',cultura:'Cultura e ambiente',mondo:'Italia nel mondo',simboli:'Simboli'};
+const ARTA=[
+ {n:1,titolo:'Democrazia e lavoro',tema:'persona',
+  uff:"L'Italia è una Repubblica democratica, fondata sul lavoro. La sovranità appartiene al popolo, che la esercita nelle forme e nei limiti della Costituzione.",
+  semp:"L'Italia è una <b>Repubblica</b>: comanda il popolo, non il re. È <b>democratica</b> e il suo fondamento è il <span class='gloss' data-g='dirittolavoro'>lavoro</span>. Il popolo esercita il potere seguendo le regole della Costituzione.",
+  facil:"In Italia comanda il popolo, non il re. Il lavoro è molto importante. Si decide insieme, rispettando le regole della Costituzione.",
+  par:'sovranità popolare e lavoro',
+  riep:'Repubblica democratica fondata sul lavoro; la sovranità appartiene al popolo.',
+  esp:"Alla scuola si vota il rappresentante di classe: tutti hanno lo stesso diritto e si decide a maggioranza, ma sempre <b>entro le regole</b> stabilite.",
+  sap:"«Fondata sul lavoro» significa che il lavoro non è solo un modo per guadagnare: è una condizione per <b>partecipare</b> alla vita del Paese."},
+ {n:2,titolo:'Persona e solidarietà',tema:'persona',
+  uff:"La Repubblica riconosce e garantisce i diritti inviolabili dell'uomo, sia come singolo sia nelle formazioni sociali ove si svolge la sua personalità, e richiede l'adempimento dei doveri inderogabili di solidarietà politica, economica e sociale.",
+  semp:"Ogni persona ha diritti <span class='gloss' data-g='inviolabile'>inviolabili</span>, che nessuna legge può cancellare. Lo Stato li difende anche quando la persona vive in <span class='gloss' data-g='formazioni'>formazioni sociali</span> come famiglia, sindacato o associazione. Ma insieme ai diritti ci sono i doveri: la <span class='gloss' data-g='solidarieta'>solidarietà</span> politica, economica e sociale.",
+  facil:"Ogni persona ha diritti che non si possono togliere. Lo Stato li difende. Ci sono anche doveri: aiutare chi è in difficoltà.",
+  par:'diritti inviolabili + doveri di solidarietà',
+  riep:'Diritti inviolabili della persona, anche nei gruppi; doveri di solidarietà.',
+  esp:"Il volontariato, le <b>cooperative sociali</b> e le associazioni di categoria sono formazioni sociali: la Costituzione ne riconosce il ruolo nella società.",
+  sap:"«Inviolabile» vuol dire che <b>nessuna legge può cancellare</b> certi diritti, neanche se lo volesse la maggioranza."},
+ {n:3,titolo:'Uguaglianza',tema:'persona',
+  uff:"Tutti i cittadini hanno pari dignità sociale e sono eguali davanti alla legge, senza distinzione di sesso, di razza, di lingua, di religione, di opinioni politiche, di condizioni personali e sociali. È compito della Repubblica rimuovere gli ostacoli di ordine economico e sociale, che, limitando di fatto la libertà e l'eguaglianza dei cittadini, impediscono il pieno sviluppo della persona umana e l'effettiva partecipazione di tutti i lavoratori all'organizzazione politica, economica e sociale del Paese.",
+  semp:"Tutti valiamo lo stesso e <b>davanti alla legge sono uguali</b>: sesso, razza, lingua, religione, opinioni, condizione economica. Non basta: la Repubblica deve <b>rimuovere gli ostacoli</b> che in pratica impediscono alle persone di essere davvero libere ed eguali.",
+  facil:"Tutti valiamo uguale, davanti alla legge nessuna differenza. Lo Stato deve togliere gli ostacoli concreti che impediscono la libertà.",
+  par:'uguaglianza formale e sostanziale',
+  riep:'Pari dignità davanti alla legge e rimozione degli ostacoli concreti.',
+  esp:"Una ditta non può rifiutare un candidato perché <b>donna</b> o perché <b>straniero</b>: è uguaglianza <span class='gloss' data-g='sostanziale'>sostanziale</span>, non solo di facciata.",
+  sap:"Uguaglianza <b>formale</b> = tutti uguali nella legge. Uguaglianza <b>sostanziale</b> = agire per togliere gli ostacoli concreti (denaro, salute, famiglia)."},
+ {n:4,titolo:'Diritto al lavoro',tema:'persona',
+  uff:"La Repubblica riconosce a tutti i cittadini il diritto al lavoro e promuove le condizioni che rendano effettivo questo diritto. Ogni cittadino ha il dovere di svolgere, secondo le proprie possibilità e la propria scelta, un'attività o una funzione che concorra al progresso materiale o spirituale della società.",
+  semp:"Tutti hanno <b>diritto a trovare lavoro</b> e la Repubblica deve creare le condizioni perché sia possibile. Il lavoro è anche un <b>dovere</b>: ognuno, secondo le sue possibilità, deve svolgere un'attività che aiuti la società a crescere.",
+  facil:"Tutti hanno diritto a lavorare. Lo Stato aiuta a trovare lavoro. Lavorare è anche un dovere.",
+  par:'diritto e dovere di lavorare',
+  riep:'Diritto al lavoro promosso dallo Stato; dovere di svolgere un\'attività utile.',
+  esp:"Il <b>PCTO</b> (stage e attività di orientamento scuola-lavoro) prepara alla vita attiva; i corsi e l'orientamento servono a rendere effettivo il diritto al lavoro.",
+  sap:"Un'attività che «concorre al progresso materiale o spirituale» può essere anche il <b>volontariato</b> o la cura di un familiare."},
+ {n:5,titolo:'Unità e autonomie',tema:'autonomie',
+  uff:"La Repubblica, una e indivisibile, riconosce e promuove le autonomie locali; attua nei servizi che dipendono dallo Stato il più ampio decentramento amministrativo; adegua i principi ed i metodi della sua legislazione alle esigenze dell'autonomia e del decentramento.",
+  semp:"L'Italia è <b>una sola e non si può dividere</b>. Ma Comuni e Regioni hanno <b>autonomia</b>: decidono da soli su tante materie. Lo Stato delega le sue funzioni il più possibile, con il <span class='gloss' data-g='decentramento'>decentramento</span>.",
+  facil:"L'Italia è una e non si divide. Comuni e Regioni decidono molte cose da soli, più vicino ai cittadini.",
+  par:'autonomia locale e decentramento',
+  riep:'Repubblica una e indivisibile; autonomie locali e decentramento.',
+  esp:"Il Comune decide orari del mercato, trasporti e turismo locale; la Regione organizza la sanità. Regole decise <b>più vicino</b> ai cittadini.",
+  sap:"Il principio continua nell'art. 118, che usa la parola <b>sussidiarietà</b>: si decide al livello più vicino a chi vive il problema."},
+ {n:6,titolo:'Minoranze linguistiche',tema:'autonomie',
+  uff:"La Repubblica tutela con apposite norme le minoranze linguistiche.",
+  semp:"Chi parla una lingua diversa dall'italiano (ladino, tedesco, sloveno, friulano, catalano, greco, albanese…) è protetto da leggi specifiche, una <span class='gloss' data-g='minoranza'>minoranza linguistica</span> tutelata dalla Costituzione.",
+  facil:"Lo Stato protegge chi parla lingue diverse dall'italiano, con leggi dedicate.",
+  par:'tutela delle minoranze linguistiche',
+  riep:'La Repubblica tutela con apposite norme le minoranze linguistiche.',
+  esp:"In Valle d'Aosta o in Alto Adige scuole e avvisi pubblici sono anche in francese o tedesco: si valorizzano il territorio e il turismo locale.",
+  sap:"È l'<b>articolo più breve</b> di tutta la Costituzione: una sola frase, ma con un principio molto ricco."}
+];
+const ARTB=[
+ {n:7,titolo:'Stato e Chiesa cattolica',tema:'religioni',
+  uff:"Lo Stato e la Chiesa cattolica sono, ciascuno nel proprio ordine, indipendenti e sovrani. I loro rapporti sono regolati dai Patti Lateranensi. Le modificazioni dei Patti, accettate dalle due parti, non richiedono procedimento di revisione costituzionale.",
+  semp:"Lo Stato e la Chiesa cattolica si governano da soli, ciascuno nel proprio ambito, e sono <b>indipendenti e sovrani</b>. I loro rapporti sono regolati dai <span class='gloss' data-g='lateransi'>Patti Lateranensi</span> (1929), aggiornati nel 1984.",
+  facil:"Stato e Chiesa cattolica sono indipendenti: ognuno comanda nel proprio ambito e si accordano tra loro.",
+  par:'indipendenza reciproca',
+  riep:'Stato e Chiesa cattolica indipendenti; rapporti regolati dai Patti Lateranensi.',
+  esp:"Una scuola o un ospedale gestito dalla Chiesa rispetta le leggi italiane, ma organizza i suoi affari <b>in autonomia</b>.",
+  sap:"Le modificazioni dei Patti <b>non</b> richiedono la revisione costituzionale: basta l'accordo tra le due parti."},
+ {n:8,titolo:'Libertà religiosa',tema:'religioni',
+  uff:"Tutte le confessioni religiose sono egualmente libere davanti alla legge. Le confessioni religiose diverse dalla cattolica hanno diritto di organizzarsi secondo i propri statuti, in quanto non contrastino con l'ordinamento giuridico italiano. I loro rapporti con lo Stato sono regolati per legge sulla base di intese con le relative rappresentanze.",
+  semp:"Tutte le religioni hanno la <b>stessa libertà</b> davanti alla legge: quella cattolica e tutte le altre. Ognuna può organizzarsi con le sue regole, purché non vadano contro la legge italiana. Con lo Stato si arriva alle <span class='gloss' data-g='intese'>intese</span> (accordi approvati con legge).",
+  facil:"Tutte le religioni sono libere e uguali davanti alla legge. Ognuna si organizza come vuole, rispettando le leggi italiane.",
+  par:'pari libertà delle confessioni',
+  riep:'Tutte le confessioni sono ugualmente libere; intese con lo Stato.',
+  esp:"Un'impresa deve rispettare le esigenze religiose dei dipendenti: la libertà religiosa vale <b>anche al lavoro</b>.",
+  sap:"La <span class='gloss' data-g='laicita'>laicità</span> non significa essere «contro la religione»: significa uno Stato che non si identifica con nessuna fede."},
+ {n:9,titolo:'Cultura e ambiente',tema:'cultura',
+  uff:"La Repubblica promuove lo sviluppo della cultura e la ricerca scientifica e tecnica. Tutela il paesaggio e il patrimonio storico e artistico della Nazione. Tutela l'ambiente, la biodiversità e gli ecosistemi, anche nell'interesse delle future generazioni. La legge dello Stato disciplina i modi e le forme di tutela degli animali.",
+  semp:"La Repubblica favorisce cultura e ricerca scientifica; protegge <span class='gloss' data-g='paesaggio'>paesaggio</span>, monumenti e opere d'arte; protegge ambiente, <span class='gloss' data-g='biodiversita'>biodiversità</span> ed <span class='gloss' data-g='ecosistemi'>ecosistemi</span>, anche per chi verrà dopo di noi, e disciplina la tutela degli animali.",
+  facil:"Lo Stato aiuta la cultura e la ricerca. Protegge ambiente, paesaggio e animali anche per le future generazioni.",
+  par:'cultura, patrimonio e ambiente',
+  riep:'Cultura, ricerca, paesaggio, patrimonio, ambiente, biodiversità, animali.',
+  esp:"Musei, festival, restauro di borghi, ecomusei: il <b>turismo</b> e le imprese creative lavorano su questo articolo. È una base del <b>made in Italy</b>.",
+  sap:"La parte su ambiente e animali è stata <b>aggiornata nel 2022</b> con una legge costituzionale approvata a referendum."},
+ {n:10,titolo:'Diritto internazionale',tema:'mondo',
+  uff:"L'ordinamento giuridico italiano si conforma alle norme del diritto internazionale generalmente riconosciute. La condizione giuridica dello straniero è regolata dalla legge in conformità delle norme e dei trattati internazionali. Lo straniero, al quale sia impedito nel suo paese l'effettivo esercizio delle libertà democratiche garantite dalla Costituzione italiana, ha diritto d'asilo nel territorio della Repubblica, secondo le condizioni stabilite dalla legge. Non è ammessa l'estradizione dello straniero per reati politici.",
+  semp:"Le leggi italiane devono rispettare il <b>diritto internazionale</b> e i trattati. La posizione dello <b>straniero</b> è regolata dalla legge in coerenza con le norme internazionali. Chi nel proprio Paese non può esercitare le libertà democratiche ha <b>diritto d'asilo</b>. Non si estrada uno straniero per reati politici.",
+  facil:"Le leggi italiane rispettano i trattati internazionali. Chi scappa da un Paese non libero ha diritto all'asilo.",
+  par:'diritto internazionale, straniero, asilo',
+  riep:'Conformità al diritto internazionale; legge sullo straniero; diritto d\'asilo.',
+  esp:"Un'impresa che <b>esporta</b> deve rispettare i trattati commerciali; un lavoratore straniero in Italia ha gli stessi diritti previsti dalla legge italiana.",
+  sap:"Va letto insieme all'art. 11: l'Italia partecipa all'ordinamento internazionale senza rinunciare ai suoi valori."},
+ {n:11,titolo:'Pace e organizzazioni',tema:'mondo',
+  uff:"L'Italia ripudia la guerra come strumento di offesa alla libertà degli altri popoli e come mezzo di risoluzione delle controversie internazionali; consente, in condizioni di parità con gli altri Stati, alle limitazioni di sovranità necessarie ad un ordinamento che assicuri la pace e la giustizia fra le Nazioni; promuove e favorisce le organizzazioni internazionali rivolte a tale scopo.",
+  semp:"L'Italia dice <b>no alla guerra</b> per aggredire gli altri popoli o per risolvere le dispute. Accetta di cedere un pezzo della propria <span class='gloss' data-g='sovranita'>sovranità</span> quando serve per la pace (ONU, Unione Europea) e sostiene le organizzazioni internazionali che lavorano per pace e giustizia.",
+  facil:"L'Italia è contro la guerra e dà un pezzo del proprio potere a ONU e UE per mantenere la pace.",
+  par:'ripudio della guerra e limiti di sovranità',
+  riep:'Ripudio della guerra; limiti di sovranità per la pace; organizzazioni internazionali.',
+  esp:"<b>Euro, mercato unico, missioni di pace</b>: sono decisioni prese insieme ad altri Paesi, perché l'Italia ha limitato volontariamente parte della propria sovranità.",
+  sap:"Non significa «non ci interessa il mondo»: significa il contrario, l'Italia <span class='gloss' data-g='ripudio'>ripudia</span> la guerra e sceglie di collaborare."},
+ {n:12,titolo:'Il tricolore',tema:'simboli',
+  uff:"La bandiera della Repubblica è il tricolore italiano: verde, bianco e rosso, a tre bande verticali di eguali dimensioni.",
+  semp:"La bandiera nazionale è il <span class='gloss' data-g='tricolore'>tricolore</span>: verde, bianco e rosso, con tre strisce verticali di <b>uguale larghezza</b>.",
+  facil:"La bandiera italiana è verde, bianca e rossa, con tre strisce uguali.",
+  par:'tricolore',
+  riep:'Bandiera verde, bianca e rossa a tre bande verticali di eguali dimensioni.',
+  esp:"La bandiera compare negli edifici pubblici, nelle scuole e nelle manifestazioni sportive: è il simbolo dell'<b>unità del Paese</b>.",
+  sap:"Le tre bande devono avere la <b>stessa larghezza</b>: è una regola scritta nella Costituzione, non una consuetudine."}
+];
+const ART=ARTA.concat(ARTB);
+/* ===== galleria articoli ===== */
+let artSel=0;
+function montaFiltri(){
+ const keys=['tutti'].concat(Object.keys(TEMI));
+ $('#filtri').innerHTML=keys.map(k=>`<button type="button" class="chip${k==='tutti'?' sel':''}" data-t="${k}" aria-pressed="${k==='tutti'}">${k==='tutti'?'Tutti':TEMI[k]}</button>`).join('');
+ $$('#filtri .chip').forEach(b=>b.onclick=()=>filtra(b.dataset.t));
+}
+function filtra(t){
+ $$('#filtri .chip').forEach(b=>{const on=b.dataset.t===t;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on);});
+ $$('#artgrid .artbtn').forEach(b=>{b.style.display=(t==='tutti'||b.dataset.tema===t)?'':'none';});
+}
+function montaArt(){
+ $('#artgrid').innerHTML=ART.map(a=>`<button type="button" class="artbtn${letti.includes(a.n)?' letto':''}" data-n="${a.n}" data-tema="${a.tema}" aria-pressed="false"><span class="n">${a.n}</span>${a.titolo}${letti.includes(a.n)?' ✓':''}</button>`).join('');
+ $$('#artgrid .artbtn').forEach(b=>b.onclick=()=>apriArt(+b.dataset.n));
+ aggiornaLetti();
+}
+function aggiornaLetti(){
+ $('#lettiN').textContent=letti.length;
+ $('#barraLet').style.width=(letti.length/12*100)+'%';
+}
+function cambiaLetto(n,on){
+ if(on){if(!letti.includes(n))letti.push(n);}else{letti=letti.filter(x=>x!==n);}
+ store.s('cost2afm_letti',letti);
+ const b=$(`#artgrid .artbtn[data-n="${n}"]`);
+ if(b){b.classList.toggle('letto',on);
+  b.innerHTML='<span class="n">'+n+'</span>'+ART.find(a=>a.n===n).titolo+(on?' ✓':'');
+ }
+ aggiornaLetti();
+ if(letti.length===12)toast('📚 Hai letto tutti e 12 i principi fondamentali!');
+ glossInit();
+}
+function apriArt(n){
+ const a=ART.find(x=>x.n===n);if(!a)return;
+ artSel=n;
+ $$('#artgrid .artbtn').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.n===n?'true':'false'));
+ const letto=letti.includes(n);
+ $('#art-det').innerHTML=`
+  <span class="tema">${TEMI[a.tema]}</span>
+  <h3>Art. ${a.n} — ${a.titolo}</h3>
+  <p class="parola"><b>Parola chiave:</b> ${a.par}</p>
+  <p class="t-simp">${a.semp}</p>
+  <p class="t-fac">${a.facil}</p>
+  <details class="uff"><summary>📜 Leggi il testo ufficiale</summary><p>${a.uff}</p></details>
+  <div class="esempio"><b>💼 Esempio:</b> ${a.esp}</div>
+  <div class="box acc"><b>Lo sapevi?</b> ${a.sap}</div>
+  <div class="detbtns no-print">
+   <button type="button" class="btn mini" onclick="leggi(${n},this)">🔊 Ascolta l'articolo</button>
+   <label class="chk"><input type="checkbox" ${letto?'checked':''} onchange="cambiaLetto(${n},this.checked)"> Segna come letto</label>
+   <button type="button" class="btn mini" onclick="apriArt(${((n-2+12)%12)+1})">← Prec</button>
+   <button type="button" class="btn mini" onclick="apriArt(${n%12+1})">Succ →</button>
+  </div>`;
+ glossInit();
+}
+/* ===== audio (SpeechSynthesis) ===== */
+const synth=(typeof window!=='undefined'&&window.speechSynthesis)?window.speechSynthesis:null;
+const SAYS=(typeof window!=='undefined'&&typeof window.SpeechSynthesisUtterance!=='undefined');
+let voci=[];
+function caricaVoci(){try{voci=(synth&&synth.getVoices())||[]}catch(e){voci=[]}}
+if(synth){caricaVoci();if('onvoiceschanged'in synth)synth.onvoiceschanged=()=>{caricaVoci();riempiVoci();};}
+/* voce: preferenza alle voci "natural/online" italiane */
+function punteggioV(v){
+ let p=0;const n=(v.name||'').toLowerCase();
+ if(!/^it([-_]|$)/i.test(v.lang||''))p-=200;
+ if(/natural|online/.test(n))p+=60;
+ if(/elsa|elena|federica|paola|paolo|stefano|isabella|luca|cosimo|gioia/.test(n))p+=20;
+ if(v.localService===false)p+=10;
+ if(/compact|david|zira|mark/.test(n))p-=5;
+ return p;
+}
+function riempiVoci(){
+ const sel=document.getElementById('voceSel');if(!sel)return;
+ const ord=voci.slice().sort((a,b)=>{
+  const ia=/^it([-_]|$)/i.test(a.lang||'')?0:1,ib=/^it([-_]|$)/i.test(b.lang||'')?0:1;
+  return ia!==ib?ia-ib:punteggioV(b)-punteggioV(a);
+ });
+ if(!ord.length){sel.style.display='none';return;}
+ const salva=sel.value||store.g('cost2afm_voce','');
+ sel.innerHTML=ord.map(v=>'<option value="'+String(v.name).replace(/"/g,'&quot;')+'">'+v.name+'</option>').join('');
+ if(salva&&ord.some(v=>v.name===salva))sel.value=salva;else sel.value=ord[0].name;
+ sel.style.display='';
+}
+function voceScelta(){
+ const sel=document.getElementById('voceSel');
+ if(sel&&sel.value){const v=voci.filter(x=>x.name===sel.value)[0];if(v)return v;}
+ if(!voci.length)return null;
+ return voci.slice().sort((a,b)=>punteggioV(b)-punteggioV(a))[0];
+}
+let btnRec=null,resumeTimer=null,audioOk=false,audioRun=0;
+function stopResume(){try{if(resumeTimer){clearInterval(resumeTimer);resumeTimer=null;}}catch(e){}}
+function resettaBtn(){
+ stopResume();
+ if(btnRec){btnRec.innerHTML='🔊 Ascolta l\'articolo';btnRec.classList.remove('rec');btnRec=null;}
+}
+function fermaAudio(){audioRun++;stopResume();try{if(synth)synth.cancel()}catch(e){}resettaBtn();}
+/* spezza in frasi: resa più naturale, con pausa a ogni frase */
+function spezza(t){
+ try{return t.split(/(?<=[.!?…])\s+(?=[«"“(A-Z0-9])/).map(s=>s.trim()).filter(Boolean)}
+ catch(e){return [t]}
+}
+function leggi(n,btn){
+ const a=ART.find(x=>x.n===n);if(!a)return;
+ if(!synth||!SAYS){toast('🔇 Ascolto non disponibile in questo browser');return;}
+ if(btn&&btn===btnRec){fermaAudio();toast('🔇 Ascolto fermato');return;}
+ stopResume();caricaVoci();riempiVoci();audioOk=false;
+ const run=++audioRun;
+ const txt=document.body.classList.contains('facilitata')?a.facil:a.uff;
+ const frasi=spezza('Articolo '+a.n+', '+a.titolo+'. '+txt);
+ if(btn){btnRec=btn;btn.classList.add('rec');btn.innerHTML='⏹ Ferma l\'ascolto';}
+ const parte=i=>{
+  if(run!==audioRun)return;
+  if(i>=frasi.length){resettaBtn();return;}
+  const u=new SpeechSynthesisUtterance(frasi[i]);
+  u.lang='it-IT';u.rate=.92;u.pitch=1.05;u.volume=1;
+  const v=voceScelta();if(v)u.voice=v;
+  let fatto=false;
+  const dopo=()=>{if(fatto)return;fatto=true;try{clearTimeout(sic)}catch(e){}parte(i+1)};
+  u.onstart=()=>{if(run===audioRun)audioOk=true};
+  u.onend=()=>{if(run!==audioRun)return;dopo()};
+  u.onerror=()=>{if(run!==audioRun||fatto)return;fatto=true;resettaBtn();toast('🔇 Audio non riprodotto: apri il file con doppio clic nel browser');};
+  /* sicurezza: se un browser non segnala la fine frase, passa alla successiva */
+  const parole=frasi[i].split(/\s+/).length;
+  let sic=null;
+  const veglia=()=>{
+   if(run!==audioRun||fatto)return;
+   if(!synth.speaking){dopo();return;}
+   sic=setTimeout(veglia,2000);
+  };
+  sic=setTimeout(veglia,parole*500+5000);
+  try{synth.speak(u)}catch(e){fatto=true;resettaBtn();toast('🔇 Audio non disponibile')}
+ };
+ const avvia=()=>{
+  if(run!==audioRun)return;
+  if(synth.speaking){try{synth.cancel()}catch(e){}setTimeout(()=>{if(run===audioRun)parte(0)},150);}
+  else parte(0);
+ };
+ if(voci.length)avvia();else setTimeout(()=>{caricaVoci();riempiVoci();avvia()},500);
+ resumeTimer=setInterval(()=>{try{synth.resume()}catch(e){}},700);
+ setTimeout(()=>{
+  if(run!==audioRun||audioOk||synth.speaking)return;
+  resettaBtn();
+  toast(voci.length
+   ?'🔇 Nessun audio partito: apri il file con doppio clic nel browser, non nell\'anteprima'
+   :'🔇 Nessuna voce disponibile: installa una voce italiana nelle impostazioni di Windows');
+ },2800);
+ toast('🔊 In riproduzione…');
+}
+/* ===== tappa 5: casi concreti ===== */
+const CASI=[
+ {q:"Un'impresa non assume una candidata perché è donna e perché ha due figli.",
+  op:['Art. 2 — Diritti e solidarietà','Art. 3 — Uguaglianza','Art. 12 — Tricolore'],v:1,art:3,
+  sp:"L'<b>art. 3</b> vieta ogni distinzione per sesso e condizioni personali e impone di rimuovere gli ostacoli concreti: è l'uguaglianza. L'art. 2 riguarda i diritti inviolabili, l'art. 12 è la bandiera.",
+  spf:"L'<b>art. 3</b> vieta le discriminazioni per sesso e per condizioni personali e chiede di togliere gli ostacoli concreti."},
+ {q:"Il Comune decide di valorizzare il mercato locale e i trasporti urbani.",
+  op:['Art. 5 — Autonomie locali','Art. 9 — Cultura','Art. 12 — Tricolore'],v:0,art:5,
+  sp:"L'<b>art. 5</b> riconosce e promuove le autonomie locali e il decentramento: Comune e Regione decidono sul proprio territorio, il più vicino ai cittadini.",
+  spf:"L'<b>art. 5</b> dà autonomia a Comune e Regione: decidono sul proprio territorio."},
+ {q:"Un'impresa investe nel restauro di un borgo storico e nel suo paesaggio.",
+  op:['Art. 6 — Minoranze','Art. 9 — Cultura e ambiente','Art. 11 — Pace'],v:1,art:9,
+  sp:"L'<b>art. 9</b> tutela paesaggio, patrimonio storico e artistico, ambiente e biodiversità: è il fondamento delle imprese del turismo e della creatività.",
+  spf:"L'<b>art. 9</b> tutela paesaggio, patrimonio e ambiente: è la base del turismo."},
+ {q:"Un lavoratore straniero è perseguitato nel proprio Paese e chiede protezione.",
+  op:['Art. 8 — Religioni','Art. 10 — Straniero e asilo','Art. 11 — Pace'],v:1,art:10,
+  sp:"L'<b>art. 10</b> disciplina la condizione giuridica dello straniero e riconosce il <b>diritto d'asilo</b> a chi non può esercitare le libertà democratiche nel proprio Paese.",
+  spf:"L'<b>art. 10</b> riguarda lo straniero e riconosce il diritto d'asilo a chi non è libero nel proprio Paese."},
+ {q:"L'Italia partecipa a una missione di pace delle Nazioni Unite.",
+  op:['Art. 7 — Stato e Chiesa','Art. 10 — Straniero','Art. 11 — Pace e organizzazioni'],v:2,art:11,
+  sp:"L'<b>art. 11</b> ripudia la guerra ma <b>favorisce</b> le organizzazioni internazionali che lavorano per la pace, accettando limiti di sovranità in parità con gli altri Stati.",
+  spf:"L'<b>art. 11</b> dice no alla guerra e sì alle organizzazioni internazionali per la pace."},
+ {q:"Una squadra sportiva espone il tricolore sui propri colori sociali.",
+  op:['Art. 12 — Tricolore','Art. 1 — Repubblica','Art. 6 — Minoranze'],v:0,art:12,
+  sp:"L'<b>art. 12</b> definisce la bandiera: verde, bianco e rosso, a tre bande verticali di eguali dimensioni. È il simbolo dell'unità della Repubblica.",
+  spf:"L'<b>art. 12</b> descrive la bandiera: verde, bianco e rosso, tre bande uguali."},
+ {q:"Una scuola attiva un corso nella lingua della minoranza locale (ladino, tedesco…).",
+  op:['Art. 6 — Minoranze linguistiche','Art. 3 — Uguaglianza','Art. 9 — Cultura'],v:0,art:6,
+  sp:"L'<b>art. 6</b> tutela con apposite norme le minoranze linguistiche: la Repubblica protegge chi parla lingue diverse dall'italiano.",
+  spf:"L'<b>art. 6</b> protegge chi parla lingue diverse dall'italiano."},
+ {q:"Una cooperativa sociale organizza volontari per aiutare gli anziani del quartiere.",
+  op:['Art. 4 — Diritto al lavoro','Art. 2 — Persona e solidarietà','Art. 5 — Autonomie'],v:1,art:2,
+  sp:"L'<b>art. 2</b> richiede i doveri inderogabili di solidarietà politica, economica e sociale: volontariato e cooperative sono formazioni sociali tutelate.",
+  spf:"L'<b>art. 2</b> chiede solidarietà: volontariato e cooperative sono gruppi protetti dalla Costituzione."},
+ {q:"Uno studente in PCTO fa il primo stage in un'azienda e riflette sul proprio futuro.",
+  op:['Art. 1 — Repubblica','Art. 3 — Uguaglianza','Art. 4 — Diritto al lavoro'],v:2,art:4,
+  sp:"L'<b>art. 4</b> riconosce il diritto al lavoro e il dovere di svolgere un'attività utile: scuola, orientamento e PCTO servono a renderlo effettivo.",
+  spf:"L'<b>art. 4</b> dà il diritto al lavoro e il dovere di fare un'attività utile."},
+ {q:"Un ente religioso gestisce una mensa aperta a cittadini di ogni fede.",
+  op:['Art. 7 — Stato e Chiesa cattolica','Art. 8 — Libertà religiosa','Art. 12 — Tricolore'],v:1,art:8,
+  sp:"L'<b>art. 8</b>: tutte le confessioni sono egualmente libere davanti alla legge e si organizzano nel rispetto dell'ordinamento italiano. L'art. 7 riguarda i soli rapporti con la Chiesa cattolica.",
+  spf:"L'<b>art. 8</b> dice che tutte le religioni sono libere e uguali davanti alla legge."}
+];
+let casiOk=0,casiRisp=0;
+function montaCasi(){
+ $('#casi').innerHTML=CASI.map((c,i)=>`
+  <div class="qd caso" id="cas${i}">
+   <b>${i+1}. ${c.q}</b>
+   ${c.op.map((o,j)=>`<label><input type="radio" name="c${i}" value="${j}"> ${o}</label>`).join('')}
+   <div class="esito" aria-live="polite"></div>
+  </div>`).join('');
+ $('#casi').addEventListener('change',e=>{
+  const m=/^c(\d+)$/.exec(e.target.name||'');
+  if(!m)return;
+  const i=+m[1],box=$('#cas'+i);
+  if(box.dataset.done)return;
+  box.dataset.done='1';
+  const c=CASI[i],ok=+e.target.value===c.v;
+  box.querySelectorAll('input').forEach(x=>x.disabled=true);
+  box.classList.add(ok?'ok':'no');
+  box.querySelector('.esito').className='esito '+(ok?'ok':'no');
+  box.querySelector('.esito').innerHTML=(ok?'✅ <b>Esatto!</b> ':'❌ <b>Risposta sbagliata.</b> ')+
+    `<span class="t-simp">${c.sp}</span><span class="t-fac">${c.spf}</span>`+
+    ` <button type="button" class="btn mini" onclick="apriArtE(${c.art})">Apri scheda art. ${c.art} →</button>`;
+  casiRisp++;if(ok)casiOk++;
+  $('#casiOk').textContent=casiOk;
+  $('#casiRisp').textContent=casiRisp;
+  $('#barraCasi').style.width=(casiRisp/10*100)+'%';
+  if(casiRisp===10){
+   premia('afm');
+   toast(casiOk>=7?'💼 Ottimo risultato nei casi concreti!':'💼 Casi completati: rileggi le spiegazioni sbagliate.');
+  }
+ });
+}
+function apriArtE(n){vai('s4');apriArt(n);}
+/* ===== tappa 6: verifica finale ===== */
+const QUIZ=[
+ {q:"In quante parti è divisa la Costituzione italiana?",o:["Due","Quattro","Sei"],v:1,
+  sp:"4 parti: Principi fondamentali (1–12), Parte I (13–54), Parte II (55–139) e Disposizioni transitorie e finali (I–XVIII)."},
+ {q:"Quali articoli contengono i Principi fondamentali?",o:["Artt. 1–12","Artt. 13–54","Artt. 55–139"],v:0,
+  sp:"I Principi fondamentali sono i <b>primi 12 articoli</b>: sono il fondamento di tutta la Costituzione."},
+ {q:"Quando è entrata in vigore la Costituzione italiana?",o:["2 giugno 1946","27 dicembre 1947","1° gennaio 1948"],v:2,
+  sp:"Approvata il 22 dicembre 1947 e promulgata il 27 dicembre 1947, è <b>in vigore dal 1° gennaio 1948</b>."},
+ {q:"Perché la Costituzione è definita «rigida»?",o:["Perché contiene molte parole","Perché serve un procedimento speciale per modificarla (art. 138)","Perché fu approvata dal re"],v:1,
+  sp:"Servono due deliberazioni per Camera con una pausa di 3 mesi e maggioranze larghe; inoltre l'art. 139 vieta di toccare la forma repubblicana."},
+ {q:"Perché la Costituzione è detta «compromissoria»?",o:["Perché nacce dall'incontro di culture politiche diverse","Perché nessuno voleva firmarla","Perché fu scritta in fretta"],v:0,
+  sp:"Nell'Assemblea Costituente del 1946 c'erano cattolici, liberali, socialisti e comunisti: il testo è il compromesso tra tradizioni diverse."},
+ {q:"Quale NON è una caratteristica della Costituzione italiana?",o:["Scritta","Orale","Programmatica"],v:1,
+  sp:"È <b>scritta</b> (testo unico), <b>programmatica</b> (indica obiettivi), rigida, lunga, compromissoria, democratica e suprema. Non esiste nessuna Costituzione «orale»."},
+ {q:"Art. 1: a chi appartiene la sovranità?",o:["Al popolo","Al Governo","Al Presidente del Consiglio"],v:0,
+  sp:"«La sovranità appartiene al popolo, che la esercita nelle forme e nei limiti della Costituzione»."},
+ {q:"Art. 3: cosa deve fare la Repubblica?",o:["Trattare tutti allo stesso modo solo sulla carta","Rimuovere gli ostacoli di ordine economico e sociale che limitano libertà e uguaglianza","Favorire solo i cittadini più ricchi"],v:1,
+  sp:"L'art. 3 unisce <b>uguaglianza formale</b> (tutti uguali davanti alla legge) e <b>uguaglianza sostanziale</b> (togliere gli ostacoli concreti)."},
+ {q:"Art. 9: oltre a cultura e paesaggio, cosa tutela la Repubblica?",o:["Ambiente, biodiversità ed ecosistemi","Solo i monumenti","Il commercio estero"],v:0,
+  sp:"L'art. 9 è stato aggiornato nel <b>2022</b>: tutela ambiente, biodiversità e ecosistemi «anche nell'interesse delle future generazioni», e disciplina la tutela degli animali."},
+ {q:"Art. 11: quale principio esprime?",o:["Il ripudio della guerra e la limitazione di sovranità per la pace","Il diritto di portare armi","Il divieto di viaggiare all'estero"],v:0,
+  sp:"L'Italia ripudia la guerra come strumento di offesa e consente limitazioni di sovranità per la pace (ONU, Unione Europea)."}
+];
+const MODELLI=[
+ "Ottima risposta se citi l'<b>art. 3</b> (uguaglianza): tutti i cittadini hanno pari dignità, senza distinzione di sesso, e la Repubblica deve rimuovere gli ostacoli di ordine economico e sociale. Esempio: non si può discriminare nella selezione del personale o negli stipendi. Si possono citare anche gli artt. 2 e 4 come completamento.",
+ "La <b>Costituzione si oppone con l'art. 9</b>: la Repubblica tutela il paesaggio e il patrimonio storico e artistico della Nazione (e anche ambiente e biodiversità). Il Comune ha autonomia (art. 5), ma deve esercitarla rispettando i principi costituzionali: il restauro o il riuso del teatro vengono prima del parcheggio."
+];
+let mcq=null;
+function montaQuiz(){
+ $('#quiz').innerHTML=QUIZ.map((q,i)=>`
+  <div class="qd" id="qd${i}">
+   <b>${i+1}. ${q.q}</b>
+   ${q.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join('')}
+   <div class="esito" aria-live="polite"></div>
+  </div>`).join('');
+}
+function mostraModello(id){
+ $('#'+id).innerHTML='<b>📝 Risposta modello:</b> '+MODELLI[id==='m1'?0:1];
+ $('#'+id).classList.add('show');
+}
+function correggi(){
+ let risposte=0,p=0;
+ QUIZ.forEach((q,i)=>{
+  const c=$(`input[name=q${i}]:checked`),box=$('#qd'+i),es=box.querySelector('.esito');
+  box.querySelectorAll('input').forEach(x=>x.disabled=true);
+  if(c){
+   risposte++;
+   const ok=+c.value===q.v;
+   if(ok)p+=0.6;
+   box.classList.add(ok?'ok':'no');
+   es.className='esito '+(ok?'ok':'no');
+   es.innerHTML=(ok?'✅ <b>Corretto.</b> ':'❌ <b>Non corretto.</b> ')+q.sp;
+  }else{
+   box.classList.add('no');
+   es.className='esito no';
+   es.innerHTML='❌ <b>Nessuna risposta.</b> '+q.sp;
+  }
+ });
+ if(risposte===0){
+  $('#feed').className='ris show vf-no';
+  $('#feed').innerHTML='⚠️ Rispondi almeno a una domanda prima di correggere.';
+  return;
+ }
+ mcq=p;
+ mostraModello('m1');mostraModello('m2');
+ $('#feed').className='ris show ok-box';
+ $('#feed').innerHTML='📝 Quiz corretto: <b>'+p.toFixed(1).replace('.',',')+' / 6 punti</b>. Ora leggi i due modelli e <b>assegna i punti</b> della rubrica: aggiorna il punteggio totale.';
+ aggiornaTotale();
+}
+function aggiornaTotale(){
+ if(mcq===null)return;
+ const r1=$('input[name=o1]:checked'),r2=$('input[name=o2]:checked');
+ const ap=(r1?+r1.value:0)+(r2?+r2.value:0);
+ const tot=mcq+ap;
+ const s=tot.toFixed(1).replace('.',',');
+ $('#punteggio').textContent=s;
+ const v=Math.round(tot);
+ let bl,msg;
+ if(v>=10){bl='esperto';msg='🏛️ <b>Eccellente:</b> sei un vero Costituzionalista!';}
+ else if(v>=8){bl='afm';msg='🇮🇹 <b>Ottimo:</b> cittadino consapevole, padrone dei 12 principi.';}
+ else if(v>=6){bl='cammino';msg='📘 <b>Base raggiunta:</b> ripassa le schede degli articoli sbagliati e riprova.';}
+ else{bl='ripasso';msg='🔁 <b>Da ripassare:</b> torna alla tappa 4 e rileggi gli articoli 1–12.';}
+ $('#feed').className='ris show ok-box';
+ $('#feed').innerHTML='✅ Punteggio totale: <b>'+s+' / 10</b> — Voto: <b>'+v+'</b> su 10<br>'+msg;
+ const b=store.g('cost2afm_best',0);
+ if(tot>b){store.s('cost2afm_best',tot);$('#best').textContent=tot.toFixed(1).replace('.',',');}
+ if(bl==='esperto')premia('esperto');
+ if(bl==='afm')premia('afm');
+}
+/* ===== modalità sfida ===== */
+const SFIDA=[
+ {q:"Art. 1: l'Italia è una Repubblica…",o:["fondata sul denaro","fondata sul lavoro","fondata sullo Stato"],v:1,sp:"«Fondata sul lavoro»: è il fondamento della Repubblica democratica."},
+ {q:"Quali sono i Principi fondamentali?",o:["Artt. 1–12","Artt. 13–54","Artt. 55–139"],v:0,sp:"I primi 12 articoli: i valori su cui si regge tutto."},
+ {q:"Quale articolo tutela le minoranze linguistiche?",o:["Art. 3","Art. 6","Art. 12"],v:1,sp:"Art. 6, il più breve della Costituzione: una sola frase."},
+ {q:"Quale articolo parla di ambiente, biodiversità ed ecosistemi?",o:["Art. 2","Art. 5","Art. 9"],v:2,sp:"Art. 9, aggiornato nel 2022 con legge costituzionale."},
+ {q:"Il ripudio della guerra è previsto dall'…",o:["art. 11","art. 7","art. 10"],v:0,sp:"Art. 11: no alla guerra come strumento di offesa, sì alle organizzazioni per la pace."},
+ {q:"La bandiera della Repubblica è…",o:["verde, bianco e rosso","bianco, rosso e nero","azzurro e bianco"],v:0,sp:"Art. 12: tricolore a tre bande verticali di eguali dimensioni."},
+ {q:"La Costituzione è «rigida» perché…",o:["è molto lunga","serve un procedimento speciale per modificarla","è scritta a mano"],v:1,sp:"Art. 138: due deliberazioni per Camera, pausa di 3 mesi, maggioranze larghe."},
+ {q:"Art. 2: accanto ai diritti la Costituzione richiede…",o:["i doveri di solidarietà","le tasse","il servizio militare"],v:0,sp:"Doveri inderogabili di solidarietà politica, economica e sociale."},
+ {q:"Art. 10: a chi è riconosciuto il diritto d'asilo?",o:["a chi è perseguitato per esercitare le libertà democratiche","a tutti i turisti","solo agli studenti"],v:0,sp:"Chi non può esercitare le libertà democratiche nel proprio Paese ha diritto d'asilo."},
+ {q:"Art. 139: non può essere oggetto di revisione…",o:["la legge di bilancio","la forma repubblicana","i nomi delle Regioni"],v:1,sp:"Limite invalicabile: la forma repubblicana resta intoccabile."}
+];
+let sfRisp=0,sfOk=0;
+function montaSfida(){
+ sfRisp=0;sfOk=0;
+ const box=$('#sfida');
+ box.hidden=false;
+ box.innerHTML='<h4>⚡ Sfida: 10 domande a risposta rapida</h4>'+
+  '<div id="sfList"></div><div class="esito" id="sfFin" aria-live="polite"></div>'+
+  '<button type="button" class="btn btn2" onclick="chiudiSfida()">Chiudi la sfida</button>';
+ $('#sfList').innerHTML=SFIDA.map((q,i)=>`
+  <div class="qd" id="sf${i}"><b>${i+1}. ${q.q}</b>
+   ${q.o.map((o,j)=>`<label><input type="radio" name="s${i}" value="${j}"> ${o}</label>`).join('')}
+   <div class="esito"></div></div>`).join('');
+ box.scrollIntoView({block:'start'});
+}
+function chiudiSfida(){
+ if(sfRisp<10&&!confirm('Chiudere la sfida? Le risposte date non verranno controllate.'))return;
+ $('#sfida').hidden=true;
+ $('#sfida').innerHTML='';
+}
+function sfFinita(){
+ const best=store.g('cost2afm_sfida',0);
+ if(sfOk>best){store.s('cost2afm_sfida',sfOk);
+  toast('⚡ Nuovo record nella sfida: '+sfOk+'/10');}
+ const f=$('#sfFin');f.className='esito '+(sfOk>=7?'ok':'no');
+ f.innerHTML='⚡ Sfida completata: <b>'+sfOk+'/10</b>'+(sfOk>best?' — <b>nuovo record!</b>':' — record: '+best+'/10');
+}
+function montaSfidaEvents(){
+ $('#sfida').addEventListener('change',e=>{
+  const m=/^s(\d+)$/.exec(e.target.name||'');
+  if(!m)return;
+  const i=+m[1],box=$('#sf'+i);
+  if(box.dataset.done)return;
+  box.dataset.done='1';
+  const q=SFIDA[i],ok=+e.target.value===q.v;
+  box.querySelectorAll('input').forEach(x=>x.disabled=true);
+  box.classList.add(ok?'ok':'no');
+  const es=box.querySelector('.esito');
+  es.className='esito '+(ok?'ok':'no');
+  es.innerHTML=(ok?'✅ ':'❌ ')+q.sp;
+  sfRisp++;if(ok)sfOk++;
+  if(sfRisp===10)sfFinita();
+ });
+}
+
+/* ===== inizializzazione ===== */
+function init(){
+ montaTL();
+ montaVF('#vf1',VF1,()=>{if($('#vf1').querySelectorAll('.vf.done').length===VF1.length)premia('storico');});
+ montaEx();
+ montaCaratteri();
+ montaVF('#vf3',VF3,()=>{if($('#vf3').querySelectorAll('.vf.done').length===VF3.length)toast('⚖️ Caratteristiche completate!');});
+ montaFiltri();
+ montaArt();
+ apriArt(1);
+ montaCasi();
+ montaQuiz();
+ $$('.rubric input[type=radio]').forEach(r=>r.onchange=aggiornaTotale);
+ montaSfidaEvents();
+ badgeUI();
+ prog();
+ glossInit();
+ const best=store.g('cost2afm_best',0);
+ $('#best').textContent=best?best.toFixed(1).replace('.',','):'0';
+ const fac=!!store.g('cost2afm_fac',false);
+ document.body.classList.toggle('facilitata',fac);
+ $('#lettaFac').checked=fac;
+ $('#lettaFac').onchange=e=>{
+  document.body.classList.toggle('facilitata',e.target.checked);
+  store.s('cost2afm_fac',e.target.checked);
+  toast(e.target.checked?'📖 Lettura facilitata attiva':'📖 Lettura facilitata disattivata');
+ };
+ $('#audioStop').onclick=()=>{fermaAudio();toast('🔇 Audio fermato');};
+ caricaVoci();riempiVoci();
+ $('#voceSel').onchange=e=>{store.s('cost2afm_voce',e.target.value);toast('🔊 Voce scelta: '+e.target.value);};
+ $('#resetBtn').onclick=()=>{
+  if(confirm('Azzerare tutti i progressi, i traguardi e i punteggi?')){
+   ['cost2afm_tappe','cost2afm_badge','cost2afm_letti','cost2afm_best','cost2afm_sfida','cost2afm_fac'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+   location.reload();
+  }
+ };
+ $$('section.card').forEach(s=>s.setAttribute('aria-hidden',s.classList.contains('visibile')?'false':'true'));
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+</script>
+</body>
+</html>
