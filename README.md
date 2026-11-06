@@ -7,7 +7,7 @@ Strumento didattico interattivo per la classe **2ª AFM**, sulla **struttura e l
 ## Contenuto
 
 - **7 tappe**: 1946–1948 · Mappa della Costituzione · Caratteristiche · I 12 articoli · Casi concreti · Verifica · Scheda di ripasso
-- **12 articoli** con testo ufficiale, lettura facilitata (semplificata) e **ascolto audio** (voce del PC, selezionabile)
+- **12 articoli** con testo ufficiale, lettura facilitata (semplificata) e **ascolto audio** (voce italiana *Google italiano*, scelta in automatico)
 - **10 casi concreti** da collegare ai principi costituzionali
 - **Verifica finale** in decimi: 10 domande a risposta multipla + 2 casi aperti con rubrica
 - **Modalità sfida** e traguardi (badge) salvati localmente
@@ -15,7 +15,7 @@ Strumento didattico interattivo per la classe **2ª AFM**, sulla **struttura e l
 
 ## Uso
 
-Funziona **offline**: basta un solo file `index.html`. Per ascoltare l'audio aprirlo nel browser con doppio clic (o in Microsoft Edge per le voci italiane "naturali").
+Funziona **offline**: basta un solo file `index.html`. Per ascoltare l'audio aprirlo nel browser con doppio clic: l'app usa da sola la voce italiana più fluida (*Google italiano*), senza menu di scelta.
 
 ## Fonti
 
