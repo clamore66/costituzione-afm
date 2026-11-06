@@ -229,9 +229,9 @@ dialog::backdrop{background:rgba(26,58,95,.55)}
 <!-- TAPPA 2 -->
 <section id="s2" class="card">
 <h2>2. La mappa: com'è fatta la Costituzione</h2>
-<p class="numeri"><b>139 articoli</b> + <b>18 disposizioni</b> transitorie e finali = <b>4 parti</b></p>
+<p class="numeri"><b>139 articoli</b> in <b>2 parti</b> + <b>Principi fondamentali</b> (1–12) + <b>18 disposizioni</b> transitorie e finali</p>
 <p class="t-simp">Clicca sui quattro blocchi per scoprire cosa contengono.</p>
-<p class="t-fac">La Costituzione ha 139 articoli e 18 disposizioni, in 4 parti. Clicca su un blocco per vedere cosa c'è dentro.</p>
+<p class="t-fac">La Costituzione ha 139 articoli in <b>2 parti</b> (Parte I e Parte II): prima ci sono i Principi fondamentali, dopo le disposizioni finali. Clicca su un blocco per vedere cosa c'è dentro.</p>
 <div class="mappa" id="mappa">
  <button type="button" class="blocco" style="--f:12" data-p="p1" aria-pressed="false"><b>Principi fondamentali</b>artt. 1–12</button>
  <button type="button" class="blocco" style="--f:42" data-p="p2" aria-pressed="false"><b>Parte I</b>Diritti e doveri dei cittadini — artt. 13–54</button>
@@ -374,7 +374,7 @@ dialog::backdrop{background:rgba(26,58,95,.55)}
 <div class="sheet">
  <div class="sheet-h"><b>LA COSTITUZIONE ITALIANA — I PRIMI 12 ARTICOLI</b><br>Classe 2ª AFM • Diritto ed Economia</div>
  <h3>I 4 numeri chiave</h3>
- <p class="riga"><b>139</b> articoli &nbsp;•&nbsp; <b>18</b> disposizioni transitorie e finali &nbsp;•&nbsp; <b>4</b> parti &nbsp;•&nbsp; in vigore dal <b>1° gennaio 1948</b></p>
+ <p class="riga"><b>139</b> articoli &nbsp;•&nbsp; <b>18</b> disposizioni transitorie e finali &nbsp;•&nbsp; <b>2</b> parti &nbsp;•&nbsp; in vigore dal <b>1° gennaio 1948</b></p>
  <p class="riga">Struttura: Principi fondamentali (1–12) • Parte I Diritti e doveri (13–54) • Parte II Ordinamento (55–139) • Disposizioni finali (I–XVIII)</p>
  <h3>Le 7 caratteristiche</h3>
  <ul class="righe">
@@ -991,8 +991,8 @@ function montaCasi(){
 function apriArtE(n){vai('s4');apriArt(n);}
 /* ===== tappa 6: verifica finale ===== */
 const QUIZ=[
- {q:"In quante parti è divisa la Costituzione italiana?",o:["Due","Quattro","Sei"],v:1,
-  sp:"4 parti: Principi fondamentali (1–12), Parte I (13–54), Parte II (55–139) e Disposizioni transitorie e finali (I–XVIII)."},
+ {q:"Come si articola la Costituzione italiana?",o:["Due parti: Parte I e Parte II","Quattro parti, tutte sullo stesso livello","Sei parti, come i sei titoli della Parte II"],v:0,
+  sp:"Sono <b>2 parti</b>: <b>Parte I</b> Diritti e doveri dei cittadini (artt. 13–54) e <b>Parte II</b> Ordinamento della Repubblica (artt. 55–139). Prima di esse ci sono i <b>Principi fondamentali</b> (artt. 1–12), che non è una «parte», e dopo le <b>Disposizioni transitorie e finali</b> (I–XVIII). Nella mappa li vedi come 4 blocchi."},
  {q:"Quali articoli contengono i Principi fondamentali?",o:["Artt. 1–12","Artt. 13–54","Artt. 55–139"],v:0,
   sp:"I Principi fondamentali sono i <b>primi 12 articoli</b>: sono il fondamento di tutta la Costituzione."},
  {q:"Quando è entrata in vigore la Costituzione italiana?",o:["2 giugno 1946","27 dicembre 1947","1° gennaio 1948"],v:2,
